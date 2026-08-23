@@ -43,3 +43,28 @@ published output: `_framework/blazor.web.js` is served from the static web
 asset manifest, and outside Development that manifest is not loaded — the page
 renders but nothing on it responds. `dotnet publish` writes the framework files
 into `wwwroot` and has no such condition.
+
+## Publishing
+
+Into `publish/`, as the loan application publishes:
+
+```
+dotnet publish GEPF.csproj -c Release -o "publish/GEPF"
+```
+
+`publish/` is not committed. Unlike the loan application, `appsettings.json` is
+published with the rest: there is no connection string, no mail account and no
+key in it, so there is nothing on a server for a deployment to overwrite.
+
+Run the published output **from its own folder**, or the content root is
+wherever you started it from and `wwwroot/_framework` is looked for in the
+wrong place:
+
+```
+cd publish/GEPF
+dotnet GEPF.dll --urls "https://localhost:7035;http://localhost:5115"
+```
+
+`web.config` is published alongside it for IIS, and
+`Properties/PublishProfiles/IISProfile.pubxml` holds the Web Deploy settings
+for knowyourbenefits.co.za.
