@@ -98,7 +98,22 @@ PathBase=gepf dotnet GEPF.dll --urls "https://localhost:7035;http://localhost:51
 and browse `https://localhost:7035/gepf/`. Without `PathBase` the app serves
 from the root, as before.
 
-Deploying is a copy of `publish/GEPF\*` into the site's folder. The app runs
+The application folder is `\\10.224.172.21\gepf`, and the path is closed to
+the public: IIS asks for a username and password (Basic) before anything under
+`/gepf/` is served, the calculator's own pages and its stylesheets alike.
+
+Deploying is a copy of `publish/GEPF\*` into that folder. The app runs
 in-process, so IIS holds `GEPF.dll` open: drop an `app_offline.htm` in the
 folder first (or recycle the pool) or the copy is refused, and the old build
 keeps serving until it restarts either way.
+
+```
+1. write app_offline.htm into the folder, and wait a few seconds
+2. robocopy publish\GEPF \\10.224.172.21\gepf /E
+3. delete app_offline.htm
+4. load https://www.kuleni.com.na/gepf/ and check that nothing 404s
+```
+
+Step 4 is not a formality. The two ways this has broken so far — assets
+resolved against the parent site, and a published `web.config` written over a
+hand edit — both leave a page that arrives looking fine.
