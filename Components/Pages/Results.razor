@@ -223,7 +223,7 @@
         // There is nothing to show, so the form is where to go.
         if (!inputvalues.Answered)
         {
-            NavMan.NavigateTo("/");
+            BackToInputs();
             return;
         }
 
@@ -284,7 +284,10 @@
 
     private void BackToInputs()
     {
-        NavMan.NavigateTo("/");
+        // Empty, not "/". A leading slash is measured from the host, which
+        // under /gepf/ would land on the site this app is a child of; without
+        // one it is measured from the app.
+        NavMan.NavigateTo("");
     }
 
     private int GetMonthsDifference(DateTime startDate, DateTime endDate)

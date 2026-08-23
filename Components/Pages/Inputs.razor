@@ -225,7 +225,11 @@
     private void Calculate()
     {
         inputvalues.Answered = true;
-        NavigationManager.NavigateTo("/Results");
+
+        // Relative, not "/Results". A leading slash is measured from the
+        // host, which under /gepf/ would land on the site this app is a
+        // child of; without one it is measured from the app.
+        NavigationManager.NavigateTo("Results");
     }
 
     private async Task ChangeFund()

@@ -68,3 +68,37 @@ dotnet GEPF.dll --urls "https://localhost:7035;http://localhost:5115"
 `web.config` is published alongside it for IIS, and
 `Properties/PublishProfiles/IISProfile.pubxml` holds the Web Deploy settings
 for knowyourbenefits.co.za.
+
+## Where it is hosted, and what that costs
+
+Live, this is **not** a site of its own. It is a child application at
+**https://www.kuleni.com.na/gepf/**, under a WordPress site — which is why the
+published `web.config` removes the rewrite rule it would otherwise inherit
+from its parent.
+
+Everything the browser asks for is therefore asked for relative to `/gepf/`,
+not to the host. Two rules follow, and breaking either takes the whole page
+down while leaving it looking like it loaded:
+
+* **`<base href>` is written from the request**, in `Components/App.razor`. A
+  hard `"/"` sends every stylesheet, script and image to the parent site's
+  root, where a WordPress answers 404 to all of them.
+* **Navigation is relative.** `NavigateTo("Results")`, never
+  `NavigateTo("/Results")` — a leading slash is measured from the host and
+  lands outside the application.
+
+To stand the same arrangement up locally, give Kestrel the path IIS would
+otherwise supply:
+
+```
+cd publish/GEPF
+PathBase=gepf dotnet GEPF.dll --urls "https://localhost:7035;http://localhost:5115"
+```
+
+and browse `https://localhost:7035/gepf/`. Without `PathBase` the app serves
+from the root, as before.
+
+Deploying is a copy of `publish/GEPF\*` into the site's folder. The app runs
+in-process, so IIS holds `GEPF.dll` open: drop an `app_offline.htm` in the
+folder first (or recycle the pool) or the copy is refused, and the old build
+keeps serving until it restarts either way.

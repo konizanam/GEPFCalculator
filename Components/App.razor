@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
+    @* Wherever the app has been hung. At a site's root that is "/", and under
+       a path it is that path — /gepf/ on kuleni.com.na, where this runs as a
+       child application under the site. Written out rather than fixed at "/",
+       because every stylesheet, script and image below is asked for relative
+       to it: at "/" they would be fetched from the parent site's root, which
+       is a WordPress that has never heard of them. *@
+    <base href="@BaseHref" />
     <link rel="icon" type="image/png" href="images/kuleni-logo-favicon.png" />
     <link rel="apple-touch-icon" href="images/kuleni-logo-favicon.png" />
     @* The same three, in the same order, as the loan application: Bootstrap
@@ -34,3 +40,22 @@
 </body>
 
 </html>
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    /// <summary>
+    /// The path the app is served under, with a trailing slash: "/" at a site
+    /// root, "/gepf/" under one. IIS sets it for a child application and the
+    /// framework hands it over here; nothing has to be configured or guessed.
+    /// </summary>
+    private string BaseHref
+    {
+        get
+        {
+            var pathBase = (HttpContext?.Request.PathBase.Value ?? string.Empty).Trim('/');
+            return pathBase.Length == 0 ? "/" : $"/{pathBase}/";
+        }
+    }
+}

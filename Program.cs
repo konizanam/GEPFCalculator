@@ -21,6 +21,20 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Served from a path rather than a site's own root — /gepf/ under
+// kuleni.com.na. Under IIS the path comes from the child application itself
+// and nothing needs setting; Kestrel has to be told, which is what this is
+// for: it is how the live arrangement is reproduced locally, and how the app
+// would sit behind a proxy that adds a prefix.
+// Written with or without its slashes — "gepf", "/gepf" and "/gepf/" are the
+// same path, and a setting that reads perfectly well should not stop the app
+// from starting.
+var pathBase = (builder.Configuration["PathBase"] ?? string.Empty).Trim().Trim('/');
+if (pathBase.Length > 0)
+{
+    app.UsePathBase("/" + pathBase);
+}
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
