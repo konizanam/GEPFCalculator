@@ -1,0 +1,36 @@
+@page "/Error"
+@using System.Diagnostics
+
+<PageTitle>Something went wrong - Kuleni Retirement Calculator</PageTitle>
+
+<div class="loan-application-container admin-shell">
+    <div class="admin-header">
+        <h1 class="admin-title">Something went wrong</h1>
+        <a class="btn btn-outline-danger" href="">Start again</a>
+    </div>
+
+    <div class="admin-panel">
+        <p class="admin-intro mb-0">
+            An error occurred while processing your request. Nothing you entered
+            has been sent anywhere.
+        </p>
+
+        @if (ShowRequestId)
+        {
+            <p class="calc-note">
+                Request ID: <code>@RequestId</code>
+            </p>
+        }
+    </div>
+</div>
+
+@code{
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private string? RequestId { get; set; }
+    private bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+    protected override void OnInitialized() =>
+        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+}

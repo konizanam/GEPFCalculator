@@ -1,0 +1,4698 @@
+/* Kuleni Financial Services - Corporate Colors */
+/* Based on official Kuleni logo colors */
+:root {
+    --kuleni-primary: #FF6B35;        /* Primary orange from logo */
+    --kuleni-primary-dark: #E55A2B;   /* Darker orange for hover states */
+    --kuleni-primary-light: #FF8C5A;  /* Lighter orange for accents */
+    --kuleni-gray: #6B6B6B;            /* Gray for text and KULENI text */
+    --kuleni-success: #10B981;         /* Green for checkmarks and success */
+    --kuleni-error: #EF4444;           /* Red for errors */
+    --kuleni-background: #F3F4F6;      /* Light gray background */
+    --kuleni-text: #1F2937;            /* Dark gray for text */
+    --kuleni-light: #f8f9fa;           /* Light background */
+    --kuleni-dark: #1F2937;            /* Dark text */
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--kuleni-background);
+    color: var(--kuleni-text);
+}
+
+.loan-application-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and Navbar Brand Styling */
+.navbar-brand {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+}
+
+.app-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.app-header-title {
+    color: var(--kuleni-text);
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    white-space: normal;
+    margin-left: auto;
+    text-align: right;
+}
+
+.env-status-line {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.api-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+.api-status-checking {
+    background: rgba(107,107,107,0.10);
+    color: var(--kuleni-gray);
+}
+
+.api-status-online {
+    background: rgba(16,185,129,0.12);
+    color: var(--kuleni-success);
+}
+
+.api-status-offline {
+    background: rgba(239,68,68,0.12);
+    color: var(--kuleni-error);
+}
+
+.env-api-info {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--kuleni-gray);
+    max-width: 80ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Kuleni Logo Styling */
+.kuleni-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 56px;
+    max-height: 56px;
+    flex-shrink: 0;
+}
+
+.kuleni-logo-img {
+    height: 56px;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
+    display: block;
+}
+
+.kuleni-logo-fallback {
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    height: 56px;
+    max-height: 56px;
+}
+
+.kuleni-logo-fallback svg {
+    height: 56px;
+    width: auto;
+    max-width: 240px;
+    display: block;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 768px) {
+    .kuleni-logo {
+        height: 48px;
+        max-height: 48px;
+    }
+    
+    .kuleni-logo-img {
+        height: 48px;
+        max-width: 200px;
+    }
+    
+    .kuleni-logo-fallback {
+        height: 48px;
+        max-height: 48px;
+    }
+    
+    .kuleni-logo-fallback svg {
+        height: 48px;
+        max-width: 200px;
+    }
+    .app-header-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* On small screens, hide the logo to keep the header clean */
+    .navbar-brand {
+        display: none;
+    }
+
+    .app-header {
+        justify-content: flex-end;
+    }
+
+    .kuleni-logo {
+        height: 44px;
+        max-height: 44px;
+    }
+    
+    .kuleni-logo-img {
+        height: 44px;
+        max-width: 180px;
+    }
+    
+    .kuleni-logo-fallback {
+        height: 44px;
+        max-height: 44px;
+    }
+    
+    .kuleni-logo-fallback svg {
+        height: 44px;
+        max-width: 180px;
+    }
+    .app-header-title {
+        font-size: 0.95rem;
+        flex-basis: 100%;
+    }
+}
+
+/* Stepper Styles */
+.stepper-wrapper {
+    margin: 40px 0;
+}
+
+.stepper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.stepper-container::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #dee2e6;
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+/* Smaller squares: with six or seven steps the old 50px markers pushed the
+   labels apart and made the track the biggest thing on the page. */
+.step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 0;
+    background-color: #dee2e6;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+    border: 2px solid #dee2e6;
+}
+
+.step-label {
+    font-size: 11px;
+    color: #6c757d;
+    text-align: center;
+    font-weight: 500;
+}
+
+.step.active .step-number {
+    background-color: var(--kuleni-primary);
+    color: white;
+    border-color: var(--kuleni-primary);
+}
+
+.step.completed .step-number {
+    background-color: var(--kuleni-success);
+    color: white;
+    border-color: var(--kuleni-success);
+}
+
+.step.completed .step-number::after {
+    content: '✓';
+    font-size: 24px;
+}
+
+.step.invalid .step-number {
+    background-color: var(--kuleni-error);
+    color: transparent;
+    border-color: var(--kuleni-error);
+}
+
+.step.invalid .step-number::after {
+    content: '✗';
+    font-size: 24px;
+    color: white;
+}
+
+.step.invalid .step-label {
+    color: var(--kuleni-error);
+    font-weight: 600;
+}
+
+.step.active .step-label {
+    color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+/* Disabled step styling */
+.step.disabled .step-number {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: #dee2e6;
+    color: #6c757d;
+    border-color: #dee2e6;
+}
+
+.step.disabled .step-label {
+    color: #6c757d;
+    opacity: 0.5;
+}
+
+/* Clickable step number hover effect */
+.step .step-number:hover:not(.disabled) {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.step.disabled .step-number:hover {
+    transform: none;
+    cursor: not-allowed !important;
+}
+
+.step.completed .step-label {
+    color: var(--kuleni-success);
+}
+
+/* Form Styles */
+.card {
+    border: none;
+    border-radius: 0;
+}
+
+/* Step 6: Supporting documents (polished card grid) */
+.attachments-section {
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 0;
+    padding: 16px;
+}
+
+.attachments-section .card {
+    border: 1px solid rgba(17, 24, 39, 0.10);
+    border-radius: 0;
+    background: #ffffff;
+    transition: border-color 120ms ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.attachments-section .card:hover {
+    border-color: rgba(255, 107, 53, 0.30);
+}
+
+.attachments-section .card-body {
+    flex: 1;
+    padding: 16px;
+}
+
+.attachments-section .card-footer {
+    padding: 0 16px 16px;
+}
+
+.attachments-section .fw-semibold {
+    line-height: 1.25;
+}
+
+.attachments-section .badge {
+    border-radius: 0;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.attachments-section input[type="file"].form-control {
+    border-radius: 0;
+    padding: 0.5rem 0.75rem;
+}
+
+.attachments-section [id^="doc-status-"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 0;
+    border: 1px solid rgba(17, 24, 39, 0.12);
+    background: rgba(243, 244, 246, 0.9);
+    font-weight: 600;
+}
+
+.attachments-section [id^="doc-status-"]::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    background: currentColor;
+    opacity: 0.85;
+}
+
+.attachments-section [id^="doc-status-"].text-success {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #065F46;
+}
+
+.attachments-section [id^="doc-status-"].text-danger {
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #991B1B;
+}
+
+.attachments-section [id^="doc-status-"].text-muted {
+    background: rgba(243, 244, 246, 0.95);
+    border-color: rgba(17, 24, 39, 0.10);
+    color: #6B7280;
+}
+
+.attachments-section .btn {
+    border-radius: 0;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--kuleni-dark);
+    margin-bottom: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--kuleni-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--kuleni-primary);
+    border-color: var(--kuleni-primary);
+    color: white;
+}
+
+/* Disabled stays the house orange. Bootstrap paints its own blue on
+   :disabled, which is how a disabled button once masqueraded as a
+   different component entirely. */
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background-color: var(--kuleni-primary);
+    border-color: var(--kuleni-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--kuleni-primary-dark);
+    border-color: var(--kuleni-primary-dark);
+    color: white;
+}
+
+.btn-primary:focus {
+    background-color: var(--kuleni-primary-dark);
+    border-color: var(--kuleni-primary-dark);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.5);
+}
+
+.btn-success {
+    background-color: var(--kuleni-success);
+    border-color: var(--kuleni-success);
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: white;
+}
+
+.btn-success:disabled,
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-enabled {
+    background-color: var(--kuleni-success);
+    border-color: var(--kuleni-success);
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.scroll-indicator {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Required field indicators
+   NOTE: The asterisk (*) is rendered inline in each label via
+   `<span class="text-danger">*</span>`. Do NOT also add an ::after
+   pseudo-asterisk here — that produced duplicate "**" on textarea
+   labels in the past. */
+
+/* Introduction and Purpose sections */
+.introduction-section {
+    border-left: 4px solid var(--kuleni-primary);
+}
+
+.purpose-section {
+    border: 1px solid #dee2e6;
+    border-radius: 0;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.co-applicant-toggle {
+    border: 2px solid var(--kuleni-primary-light);
+    border-radius: 0;
+}
+
+.co-applicant-question {
+    margin-top: 40px;
+}
+
+.co-applicant-question .form-check {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.co-applicant-question .form-check:hover {
+    background-color: rgba(255, 107, 53, 0.06);
+}
+
+#coApplicantYesContainer,
+#coApplicantNoContainer {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#coApplicantYesContainer:hover,
+#coApplicantNoContainer:hover {
+    background-color: rgba(255, 107, 53, 0.06);
+}
+
+/* Currency input group styling */
+.input-group-text {
+    background-color: var(--kuleni-primary);
+    color: white;
+    font-weight: 500;
+    border-color: var(--kuleni-primary);
+}
+
+.currency-input {
+    font-weight: 500;
+}
+
+/* Terms & Conditions Checkbox Styling */
+.terms-acknowledgment {
+    border: 2px solid #dee2e6;
+    transition: border-color 0.3s;
+    background-color: #F9FAFB;
+}
+
+.terms-acknowledgment .form-check-input:disabled,
+.terms-acknowledgment .form-check-input.disabled-checkbox {
+    cursor: not-allowed !important;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.terms-acknowledgment .form-check-input:not(:disabled) {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.terms-acknowledgment .form-check-input:checked {
+    background-color: var(--kuleni-success);
+    border-color: var(--kuleni-success);
+}
+
+/* Review (Step 8) - Stepper-style preview */
+.review-stepper-sections {
+    display: block;
+}
+
+.review-step-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.review-step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    background: rgba(255, 107, 53, 0.08);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.review-step-title {
+    font-weight: 700;
+    color: var(--kuleni-text);
+}
+
+.review-step-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.review-step-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 0;
+    background: rgba(16, 185, 129, 0.14);
+    color: #065f46;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    white-space: nowrap;
+}
+
+.review-step-body {
+    padding: 16px 18px;
+}
+
+.review-kv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .review-kv-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.review-kv {
+    border: 1px solid #f1f5f9;
+    background: #fafafa;
+    border-radius: 0;
+    padding: 12px;
+}
+
+.review-k {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.review-v {
+    font-weight: 600;
+    color: var(--kuleni-text);
+    word-break: break-word;
+}
+
+.review-highlight {
+    border: 1px solid rgba(255, 107, 53, 0.25);
+    background: rgba(255, 107, 53, 0.06);
+    border-radius: 0;
+    padding: 12px;
+    margin-bottom: 14px;
+}
+
+.review-highlight-title {
+    font-weight: 700;
+    color: var(--kuleni-primary-dark);
+    margin-bottom: 8px;
+}
+
+.review-highlight-list {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--kuleni-text);
+}
+
+.review-attachments {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .review-attachments {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.review-attachment {
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    padding: 12px;
+    background: #ffffff;
+}
+
+.review-attachment-name {
+    font-weight: 700;
+    color: var(--kuleni-text);
+}
+
+.review-attachment-meta {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.review-signature-img {
+    max-width: 320px;
+    max-height: 160px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    background: #ffffff;
+    padding: 6px;
+}
+
+.terms-acknowledgment .form-check-label {
+    font-size: 16px;
+    color: #1F2937;
+    cursor: pointer;
+}
+
+.terms-acknowledgment .form-check-input:disabled + .form-check-label {
+    color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+#termsStatusMessage {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+#scrollStatus.text-warning {
+    color: #F59E0B;
+}
+
+#scrollStatus.text-success {
+    color: #10B981;
+    font-weight: 600;
+}
+
+/* Terms Content Scrollable Container */
+.terms-content {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #D1D5DB;
+    border-radius: 0;
+    padding: 20px;
+    background-color: #F9FAFB;
+}
+
+.terms-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terms-content::-webkit-scrollbar-track {
+    background: #F3F4F6;
+    border-radius: 0;
+}
+
+.terms-content::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 0;
+}
+
+.terms-content::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* Phone Input Wrapper */
+.phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.phone-prefix {
+    background-color: var(--kuleni-gray);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--kuleni-gray);
+    border-right: none;
+    border-radius: 0;
+    font-weight: 500;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.phone-input-wrapper .form-control {
+    border-left: none;
+    border-radius: 0;
+    padding-left: 0.5rem;
+}
+
+.phone-input-wrapper .form-control:focus {
+    border-left: 1px solid var(--kuleni-primary);
+    padding-left: calc(0.5rem - 1px);
+}
+
+/* ----------------------------------------------------------------
+   Mandatory-field border colouring
+   ---------------------------------------------------------------- */
+
+/* Default state for any required field: red INSIDE border.
+   Covers checkboxes and radios too, so "mandatory but empty" reads the
+   same way on every control type rather than only on text inputs. */
+.form-control[required],
+.form-select[required],
+textarea[required],
+input[required],
+select[required],
+.form-check-input[required] {
+    border: 1px solid var(--kuleni-error);
+    box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.15);
+}
+
+/* When the user fills the field correctly, JS adds .is-valid; flip to green */
+.form-control.is-valid,
+.form-select.is-valid,
+textarea.is-valid,
+input.is-valid,
+select.is-valid,
+.form-check-input.is-valid {
+    border: 1px solid var(--kuleni-success) !important;
+    box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* A checked box already fills with the brand colour, so the tick/cross
+   icons and their padding must not be applied to check inputs — they
+   would overwrite the check mark and blow out the 1em box. */
+.form-check-input.is-valid,
+.form-check-input.is-invalid {
+    background-image: none;
+    padding-right: 0;
+}
+
+.form-check-input.is-valid:checked {
+    background-color: var(--kuleni-success);
+    border-color: var(--kuleni-success) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='square' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+}
+
+.form-check-input[type="radio"].is-valid:checked {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3crect x='2' y='2' width='4' height='4' fill='%23fff'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+}
+
+/* Validation success/error icons */
+.is-valid {
+    border-color: var(--kuleni-success) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2310B981' d='m2.3 6.73.98-.98-.98-.98-.98.98.98.98zm2.12-2.12L4.14 4.14l-.98-.98-.98.98.98.98z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.is-invalid {
+    border-color: var(--kuleni-error) !important;
+    box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.25) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23EF4444'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6.2.2.2-.2M6 8.5V6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+/* ----------------------------------------------------------------
+   Checkbox visibility
+   Bootstrap's default form-check-input can render almost invisible
+   on white backgrounds. Force a visible 2px outline + larger size.
+   ---------------------------------------------------------------- */
+.form-check-input {
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #6B6B6B;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.form-check-input:hover {
+    border-color: var(--kuleni-primary);
+}
+
+.form-check-input:focus {
+    border-color: var(--kuleni-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: var(--kuleni-primary);
+    border-color: var(--kuleni-primary);
+}
+
+/* When the surrounding group is invalid (e.g. Purpose of Loan with
+   no boxes ticked) highlight every checkbox red so the user can find
+   them after scroll-to-error. */
+.purpose-section.is-invalid-group .form-check-input,
+.form-check-input.is-invalid {
+    border-color: var(--kuleni-error);
+    box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.25);
+}
+
+.purpose-section.is-invalid-group {
+    border: 1px solid var(--kuleni-error);
+    box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.15);
+}
+
+/* Terms and Conditions Container */
+.terms-container {
+    margin-bottom: 20px;
+}
+
+.terms-content {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #D1D5DB;
+    border-radius: 0;
+    padding: 20px;
+    background-color: #F9FAFB;
+    line-height: 1.8;
+}
+
+.terms-content h5 {
+    color: var(--kuleni-primary);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Section headers - apply Kuleni branding */
+.step-content h4 {
+    color: var(--kuleni-primary);
+    font-weight: 600;
+    border-bottom: 2px solid var(--kuleni-primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.terms-content h6 {
+    color: var(--kuleni-dark);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.terms-content p {
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.terms-content ul {
+    margin-bottom: 15px;
+    padding-left: 25px;
+}
+
+.terms-content li {
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+/* Step Content */
+.step-content {
+    min-height: 400px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Validation Styles */
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* (Duplicate .is-invalid / .is-valid rules removed — see the canonical
+   block above with the inset red/green box-shadow used to make the
+   inner border clearly visible.) */
+
+/* Validation indicators */
+.field-valid::after {
+    content: '✓';
+    color: var(--kuleni-success);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.field-invalid::after {
+    content: '✗';
+    color: var(--kuleni-error);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stepper-container {
+        flex-wrap: wrap;
+    }
+
+    .step {
+        flex: 0 0 33.333%;
+        margin-bottom: 20px;
+    }
+
+    .step-label {
+        font-size: 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .loan-application-container {
+        padding: 10px;
+    }
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 0;
+    border: none;
+}
+
+.alert-info {
+    background-color: #e7f3ff;
+    color: #004085;
+}
+
+/* Navigation Buttons */
+.d-flex.justify-content-between {
+    gap: 10px;
+}
+
+.btn {
+    min-width: 120px;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Footer */
+footer {
+    margin-top: 60px;
+}
+
+/* ----------------------------------------------------------------
+   Flat + compact form theme
+   Loaded after Bootstrap, so these win for equal specificity.
+   Tune the whole form's typography and control height from the
+   variables below — nothing else hard-codes these sizes.
+   ---------------------------------------------------------------- */
+:root {
+    /* The whole type scale is these three values. Everything else derives
+       from them, so the form has one body size and one heading size —
+       no component invents its own. */
+    --form-font-size: 0.8125rem;      /* 13px - body copy, inputs, selects, labels */
+    --form-label-size: 0.8125rem;     /* 13px - field labels (same as body) */
+    --form-heading-size: 0.9375rem;   /* 15px - every heading, h1 through h6 */
+    --form-pad-y: 0.25rem;
+    --form-pad-x: 0.5rem;
+    --form-line-height: 1.4;
+    /* Room for Bootstrap's select caret / our validation icons */
+    --form-pad-select: 1.75rem;
+    --form-pad-validated: calc(1.4em + 0.5rem);
+}
+
+/* Square everything, no exceptions the markup can win.
+   `!important` on a universal selector also beats Bootstrap's own
+   `!important` utilities (.rounded*, .shadow*) and any inline
+   style="border-radius:..." that creeps back into a .cshtml. */
+*,
+*::before,
+*::after {
+    border-radius: 0 !important;
+}
+
+/* Only exception: the loading spinner must stay a circle — it reads as
+   broken mid-rotation when square. */
+.spinner-border,
+.spinner-grow {
+    border-radius: 50% !important;
+}
+
+/* Square radios would be indistinguishable from checkboxes, so give the
+   checked state a square inner mark instead of Bootstrap's round dot. */
+.form-check-input[type="radio"]:checked {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3crect x='2' y='2' width='4' height='4' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* Flat: no elevation anywhere. Zero-blur focus rings and the inset
+   validation borders survive — they are functional indicators, not
+   decoration, and both are defined above. */
+.shadow, .shadow-sm, .shadow-lg,
+.card, .navbar, .modal-content, .dropdown-menu, .toast, .list-group {
+    box-shadow: none !important;
+}
+
+/* --- Field sizing --- */
+.form-control,
+.form-select,
+.input-group-text,
+.phone-prefix {
+    font-size: var(--form-font-size);
+    line-height: var(--form-line-height);
+    padding: var(--form-pad-y) var(--form-pad-x);
+}
+
+.form-select {
+    padding-right: var(--form-pad-select);
+    background-size: 12px 9px;
+}
+
+/* Validation icons need their own right gutter back */
+.form-control.is-valid,
+.form-control.is-invalid,
+.form-select.is-valid,
+.form-select.is-invalid,
+textarea.is-valid,
+textarea.is-invalid {
+    padding-right: var(--form-pad-validated);
+}
+
+textarea.form-control {
+    min-height: 0;
+}
+
+input[type="file"].form-control::file-selector-button {
+    padding: var(--form-pad-y) var(--form-pad-x);
+    font-size: var(--form-font-size);
+    margin: calc(var(--form-pad-y) * -1) var(--form-pad-x) calc(var(--form-pad-y) * -1) calc(var(--form-pad-x) * -1);
+}
+
+.attachments-section input[type="file"].form-control {
+    padding: var(--form-pad-y) var(--form-pad-x);
+}
+
+/* --- Labels and helper text --- */
+.form-label {
+    font-size: var(--form-label-size);
+    margin-bottom: 3px;
+}
+
+.form-check-label,
+.terms-acknowledgment .form-check-label {
+    font-size: var(--form-font-size);
+}
+
+.form-check-input,
+.terms-acknowledgment .form-check-input:not(:disabled) {
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+}
+
+.text-danger,
+.invalid-feedback,
+.form-text {
+    font-size: var(--form-label-size);
+    margin-top: 3px;
+}
+
+/* --- Body copy inside the form --- */
+/* Prose, notices and card text were still at Bootstrap's 1rem while the
+   fields dropped to 13px, which made blocks like the pension-pledge
+   notice read as oversized next to everything around them. */
+.step-content {
+    font-size: var(--form-font-size);
+    line-height: 1.5;
+}
+
+.alert {
+    font-size: var(--form-font-size);
+    line-height: 1.5;
+    padding: 10px 12px;
+}
+
+/* Introduction notice: one flat square block, not a tinted card wrapped
+   around another tinted card. Overrides Bootstrap's .p-4 and .bg-light,
+   which are applied in the markup. */
+.introduction-section {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+.introduction-section .alert {
+    margin-bottom: 0;
+    border: 0;
+}
+
+/* --- Headings: one size for all of them --- */
+/* `!important` because several headings carry inline styles in the
+   markup, and Bootstrap sizes h1-h6 individually. */
+.step-content h1, .step-content h2, .step-content h3,
+.step-content h4, .step-content h5, .step-content h6,
+.card-body h1, .card-body h2, .card-body h3,
+.card-body h4, .card-body h5, .card-body h6 {
+    font-size: var(--form-heading-size) !important;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.step-content h4 {
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+}
+
+/* --- Body copy: one size for everything that is not a heading --- */
+/* Bootstrap's .small / .h6 / .lead and inline styles would otherwise
+   each pull in their own size. */
+.step-content p,
+.step-content li,
+.step-content small,
+.step-content .small,
+.step-content .form-text,
+.step-content .lead,
+.step-content label,
+.step-content span,
+.step-content div,
+.step-content td,
+.step-content th {
+    font-size: var(--form-font-size);
+}
+
+/* The same, for pages built on the admin shell rather than the stepper.
+   Without this a plain <p> matches no rule and falls through to
+   Bootstrap's 16px, which reads a size larger than the form beside it.
+
+   Deliberately narrower than the list above: no div, span, td or th.
+   Those would outrank .status-label and .admin-tag, which set their own
+   size on purpose, and tables already get theirs from .admin-table. */
+.admin-shell p,
+.admin-shell li,
+.admin-shell small,
+.admin-shell .small,
+.admin-shell .form-text,
+.admin-shell .lead {
+    font-size: var(--form-font-size);
+}
+
+/* --- Buttons --- */
+.btn {
+    min-width: 96px;
+    padding: 6px 14px;
+    font-size: var(--form-font-size);
+}
+
+/* --- Terms / review panels --- */
+.terms-content {
+    font-size: var(--form-font-size);
+    line-height: 1.6;
+    padding: 12px;
+}
+
+.review-step-header,
+.review-step-body {
+    padding: 10px 12px;
+}
+
+.review-kv,
+.review-highlight,
+.review-attachment {
+    padding: 8px 10px;
+}
+
+.review-v,
+.review-attachment-name {
+    font-size: var(--form-font-size);
+}
+
+.review-k,
+.review-step-subtitle,
+.review-attachment-meta,
+.review-step-pill {
+    font-size: var(--form-label-size);
+}
+
+
+/* ----------------------------------------------------------------
+   Account pages (sign in, register, reset) and admin screens
+   Same flat, square, compact language as the form.
+   ---------------------------------------------------------------- */
+.account-shell {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.account-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 28px;
+}
+
+.account-title {
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-primary);
+    margin-bottom: 6px;
+}
+
+.account-subtitle {
+    font-size: var(--form-font-size);
+    color: var(--kuleni-gray);
+    margin-bottom: 20px;
+}
+
+.account-card .form-label,
+.account-card .form-control,
+.account-card .form-check-label,
+.account-card .alert,
+.account-card .btn {
+    font-size: var(--form-font-size);
+}
+
+.account-card .form-control {
+    padding: var(--form-pad-y) var(--form-pad-x);
+}
+
+.account-links {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #e5e7eb;
+    font-size: var(--form-font-size);
+    text-align: center;
+}
+
+.account-links a {
+    color: var(--kuleni-primary);
+    text-decoration: none;
+}
+
+.account-links a:hover { text-decoration: underline; }
+
+.account-links-sep {
+    color: #d1d5db;
+    margin: 0 8px;
+}
+
+/* --- Live password checklist ---
+   A panel over the form rather than a block inside it. Sitting in the flow it
+   held a card's worth of height permanently, for a list that only matters
+   while somebody is typing a password. It is anchored to the field, appears
+   on the first keystroke and goes again when the field is left. */
+.field-popover-anchor {
+    position: relative;
+}
+
+.password-rules {
+    list-style: none;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.password-rules.is-open {
+    display: block;
+}
+
+/* Points at the field it belongs to, so it reads as attached rather than as
+   another panel that happens to be nearby. */
+.password-rules.is-open::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 14px;
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-left: 1px solid #d1d5db;
+    border-top: 1px solid #d1d5db;
+    transform: rotate(45deg);
+}
+
+/* Narrow screens: the card is nearly the width of the display, so let the
+   panel use all of it rather than squeezing the rule text. */
+@media (max-width: 480px) {
+    .password-rules {
+        left: -4px;
+        right: -4px;
+    }
+}
+
+.password-rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    padding: 2px 0;
+}
+
+/* Neutral until the user types, then red for outstanding and green for met,
+   matching the border language used across the form. */
+.password-rule-icon {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    border: 1px solid #9ca3af;
+    background: #ffffff;
+    position: relative;
+}
+
+.password-rule.is-met { color: var(--kuleni-success); }
+.password-rule.is-met .password-rule-icon {
+    border-color: var(--kuleni-success);
+    background: var(--kuleni-success);
+}
+
+.password-rule.is-unmet { color: var(--kuleni-error); }
+.password-rule.is-unmet .password-rule-icon { border-color: var(--kuleni-error); }
+
+/* A line under a field, for something the field itself cannot show — that an
+   address is already registered, and what to do about it. */
+.field-note {
+    font-size: var(--form-label-size);
+    margin-top: 4px;
+    min-height: 1em;
+}
+
+.field-note.is-met { color: var(--kuleni-success); }
+.field-note.is-unmet { color: var(--kuleni-error); }
+.field-note a { color: inherit; text-decoration: underline; }
+
+.password-match {
+    font-size: var(--form-label-size);
+    margin-top: 4px;
+    min-height: 1em;
+}
+
+.password-match.is-met { color: var(--kuleni-success); }
+.password-match.is-unmet { color: var(--kuleni-error); }
+
+/* --- Admin screens --- */
+.admin-shell { padding: 8px 0 40px; }
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.admin-title {
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-primary);
+    margin: 0;
+}
+
+.admin-panel {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--form-font-size);
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #e5e7eb;
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background: #f9fafb;
+    font-weight: 600;
+}
+
+/* Wide tables scroll inside their own container rather than the page. */
+.admin-table-scroll {
+    overflow-x: auto;
+}
+
+.admin-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    border: 1px solid rgba(255, 107, 53, 0.35);
+    background: rgba(255, 107, 53, 0.10);
+    color: var(--kuleni-primary-dark);
+    font-size: var(--form-label-size);
+    margin: 1px 2px 1px 0;
+}
+
+.admin-tag-muted {
+    border-color: #d1d5db;
+    background: #f3f4f6;
+    color: var(--kuleni-gray);
+}
+
+/* Permission matrix: module rows x CRUD columns. */
+.permission-matrix th.action-col,
+.permission-matrix td.action-col {
+    text-align: center;
+    width: 84px;
+}
+
+.permission-matrix td.module-col { font-weight: 600; }
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Editing a value in place inside a cell — the input stays narrow so the
+   column does not stretch the table. */
+.admin-inline-edit {
+    margin-top: 6px;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.admin-inline-edit .form-control {
+    min-width: 0;
+    flex: 1 1 180px;
+}
+
+.admin-nav {
+    display: flex;
+    gap: 14px;
+    font-size: var(--form-font-size);
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.admin-nav a { color: var(--kuleni-gray); text-decoration: none; }
+.admin-nav a:hover { color: var(--kuleni-primary); }
+.admin-nav a.active { color: var(--kuleni-primary); font-weight: 600; }
+
+/* --- Signed-in user strip in the header --- */
+.user-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+.user-strip form { margin: 0; }
+
+.user-strip .btn-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--kuleni-primary);
+    font-size: var(--form-label-size);
+    min-width: 0;
+    text-decoration: none;
+}
+
+.user-strip .btn-link:hover { text-decoration: underline; }
+
+/* Login: logo and company name replace the heading/subtitle. */
+.account-brand {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.account-brand-logo {
+    max-width: 220px;
+    max-height: 64px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: inline-block;
+}
+
+/* Shown only if the logo image is missing, so the card is never unbranded. */
+.account-brand-fallback {
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-gray);
+}
+
+/* App title under the logo on the login card. */
+.account-brand-title {
+    margin-top: 10px;
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+    line-height: 1.3;
+}
+
+/* ----------------------------------------------------------------
+   App shell: collapsible left sidebar + slim top bar
+   ---------------------------------------------------------------- */
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch;
+}
+
+.app-sidebar {
+    flex: 0 0 240px;
+    width: 240px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    transition: width 160ms ease, flex-basis 160ms ease;
+    overflow: hidden;
+}
+
+/* Collapsed: icon rail only. Width is the single source of truth; the
+   child rules below key off the parent class rather than being toggled
+   individually. */
+.app-shell.is-collapsed .app-sidebar {
+    flex-basis: 56px;
+    width: 56px;
+}
+
+.app-sidebar-brand {
+    padding: 16px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.app-sidebar-logo-link {
+    display: block;
+    text-decoration: none;
+}
+
+.app-sidebar .kuleni-logo {
+    height: auto;
+    max-height: none;
+    justify-content: center;
+}
+
+.app-sidebar .kuleni-logo-img {
+    height: auto;
+    max-height: 46px;
+    max-width: 100%;
+}
+
+.app-sidebar-title {
+    margin-top: 10px;
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+    line-height: 1.3;
+}
+
+/* Collapsed: hide the wordmark and title, keep a compact logo. */
+.app-shell.is-collapsed .app-sidebar-title { display: none; }
+.app-shell.is-collapsed .app-sidebar-brand { padding: 12px 4px; }
+.app-shell.is-collapsed .app-sidebar .kuleni-logo-img { max-height: 26px; }
+
+.app-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.app-sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    color: var(--kuleni-text);
+    text-decoration: none;
+    font-size: var(--form-font-size);
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+}
+
+.app-sidebar-nav a:hover {
+    background: rgba(255, 107, 53, 0.08);
+    color: var(--kuleni-primary-dark);
+}
+
+.app-sidebar-nav a.active {
+    border-left-color: var(--kuleni-primary);
+    background: rgba(255, 107, 53, 0.10);
+    color: var(--kuleni-primary-dark);
+    font-weight: 600;
+}
+
+.nav-icon {
+    flex: 0 0 16px;
+    font-size: 8px;
+    line-height: 1;
+    color: var(--kuleni-primary);
+    text-align: center;
+}
+
+.app-shell.is-collapsed .nav-text { display: none; }
+.app-shell.is-collapsed .app-sidebar-nav a { justify-content: center; padding: 10px 0; }
+
+/* --- Main column --- */
+.app-main {
+    flex: 1 1 auto;
+    min-width: 0;            /* lets wide tables scroll instead of stretching the page */
+    display: flex;
+    flex-direction: column;
+}
+
+.app-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.app-sidebar-toggle {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: var(--kuleni-text);
+    font-size: 14px;
+    line-height: 1;
+    padding: 5px 9px;
+    cursor: pointer;
+}
+
+.app-sidebar-toggle:hover {
+    border-color: var(--kuleni-primary);
+    color: var(--kuleni-primary);
+}
+
+/* Signed-in user and API status, top left next to the toggle. */
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    min-width: 0;
+}
+
+.topbar-user-name {
+    font-weight: 600;
+    color: var(--kuleni-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 40ch;
+}
+
+.topbar-logout {
+    margin: 0 0 0 auto;      /* pushed to the far edge, away from the identity group */
+}
+
+.topbar-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: var(--kuleni-gray);
+    padding: 5px 8px;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.topbar-logout-btn:hover {
+    border-color: var(--kuleni-error);
+    color: var(--kuleni-error);
+}
+
+/* --- Notification bell, between the identity group and sign out --- */
+.topbar-bell {
+    position: relative;
+    margin: 0;
+}
+
+.topbar-bell-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: var(--kuleni-gray);
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.topbar-bell-btn:hover,
+.topbar-bell.is-open .topbar-bell-btn {
+    border-color: var(--kuleni-primary);
+    color: var(--kuleni-primary);
+}
+
+/* The count sits on the bell rather than beside it, so the control keeps
+   the same width whether there is anything unread or not. */
+.topbar-bell-count {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    min-width: 16px;
+    padding: 0 3px;
+    background: var(--kuleni-primary);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+}
+
+.topbar-bell-panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 1200;
+    width: 320px;
+    max-width: calc(100vw - 24px);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.topbar-bell-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+    font-weight: 600;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+}
+
+.topbar-bell-action {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--kuleni-primary);
+    font-size: var(--form-label-size);
+    cursor: pointer;
+}
+
+.topbar-bell-action:hover { text-decoration: underline; }
+
+.topbar-bell-empty {
+    margin: 0;
+    padding: 14px 10px;
+    color: var(--kuleni-gray);
+    font-size: var(--form-label-size);
+}
+
+.topbar-bell-item {
+    display: block;
+    padding: 9px 10px;
+    border-bottom: 1px solid #f1f2f4;
+    color: var(--kuleni-text);
+    text-decoration: none;
+}
+
+.topbar-bell-item:hover { background: #f9fafb; }
+
+/* Unread carries a left bar rather than a bolder weight: it survives the
+   row already using weight for the title. */
+.topbar-bell-item.is-unread {
+    border-left: 3px solid var(--kuleni-primary);
+    padding-left: 7px;
+}
+
+.topbar-bell-title {
+    display: block;
+    font-weight: 600;
+    font-size: var(--form-label-size);
+}
+
+.topbar-bell-preview {
+    display: block;
+    color: var(--kuleni-gray);
+    font-size: var(--form-label-size);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-bell-time {
+    display: block;
+    margin-top: 2px;
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.topbar-bell-all {
+    display: block;
+    padding: 9px 10px;
+    text-align: center;
+    color: var(--kuleni-primary);
+    font-size: var(--form-label-size);
+    text-decoration: none;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.topbar-bell-all:hover { text-decoration: underline; }
+
+/* --- Person menu, last in the top bar --- */
+.topbar-profile {
+    position: relative;
+    margin: 0;
+}
+
+.topbar-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: var(--kuleni-gray);
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.topbar-profile-btn:hover,
+.topbar-profile.is-open .topbar-profile-btn {
+    border-color: var(--kuleni-primary);
+    color: var(--kuleni-primary);
+}
+
+.topbar-profile-panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 1200;
+    min-width: 200px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+.topbar-profile-head {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.topbar-profile-name {
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+    word-break: break-all;
+}
+
+.topbar-profile-item {
+    display: block;
+    padding: 8px 10px;
+    border-bottom: 1px solid #f1f2f4;
+    color: var(--kuleni-text);
+    font-size: var(--form-label-size);
+    text-decoration: none;
+}
+
+.topbar-profile-item:last-child { border-bottom: 0; }
+
+.topbar-profile-item:hover {
+    background: #f9fafb;
+    color: var(--kuleni-primary);
+}
+
+/* --- Profile summary ---
+   Each entry is a bordered cell rather than text floating on white: the
+   label/value pairs were running together across the row, and a boundary
+   does more for readability here than more whitespace would. */
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0;
+    margin: 0;
+    border-top: 1px solid #e5e7eb;
+    border-left: 1px solid #e5e7eb;
+}
+
+.profile-grid > div {
+    padding: 10px 12px;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    min-width: 0;
+}
+
+.profile-grid dt {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #9ca3af;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.profile-grid dd {
+    margin: 0;
+    font-size: var(--form-font-size);
+    font-weight: 500;
+    color: var(--kuleni-text);
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+/* A value that has not been filled in reads as absent rather than as data. */
+.profile-grid dd.is-empty {
+    color: #d1d5db;
+    font-weight: 400;
+}
+
+/* Section headings carry a rule to the left, so the two panels read as
+   parts of one record rather than two unrelated boxes. */
+.admin-panel .admin-subtitle {
+    padding-left: 10px;
+    border-left: 3px solid var(--kuleni-primary);
+    margin-bottom: 12px;
+}
+
+.profile-password-form { max-width: 520px; }
+
+/* --- What each stage is meant to take ---
+   Under the stage name, quieter than it: the stage is where you are, the days
+   are what you are owed. */
+.status-step-sla {
+    margin-top: 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #9ca3af;
+}
+
+/* The stage in hand is the one whose promise is running. */
+.status-step.is-current .status-step-sla { color: var(--kuleni-primary); }
+
+.status-track-sla {
+    margin: 16px 0 0;
+    font-size: var(--form-font-size);
+    color: var(--kuleni-text);
+    line-height: 1.5;
+}
+
+/* --- Choosing what you came for ---
+   Two doors, side by side, neither dressed as the default: applying and
+   asking are both reasonable things to want. Square and flat as everything
+   else; the border does the work a shadow would. */
+.route-choice {
+    margin-bottom: 32px;
+}
+
+.route-choice-title {
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    color: var(--kuleni-text);
+    margin: 0 0 16px;
+}
+
+.route-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* A button and a link sit side by side here, so both are reset to the same
+   thing rather than inheriting their own defaults. */
+.route-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid var(--kuleni-primary);
+    background: #ffffff;
+    color: var(--kuleni-text);
+    text-decoration: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.route-option:hover,
+.route-option:focus {
+    background: #f9fafb;
+    border-color: var(--kuleni-primary);
+    border-left-color: var(--kuleni-primary);
+    color: var(--kuleni-text);
+    text-decoration: none;
+}
+
+.route-option-name {
+    display: block;
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    color: var(--kuleni-primary);
+    margin-bottom: 6px;
+}
+
+.route-option-detail {
+    display: block;
+    font-size: var(--form-font-size);
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* --- Employment verification --- */
+.verification-state {
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+    margin: 0 0 6px;
+}
+
+.verification-state.is-on { color: var(--kuleni-primary); }
+
+/* The answer to an upload, beside the box the file was chosen in. Square and
+   flat like everything else; the colour carries the verdict. */
+.verification-result {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    font-size: var(--form-font-size);
+    line-height: 1.5;
+    color: var(--kuleni-text);
+}
+
+.verification-result.is-working {
+    border-color: #d1d5db;
+    background: #f9fafb;
+    color: #6b7280;
+}
+
+.verification-result.is-error {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #991b1b;
+    font-weight: 600;
+}
+
+.verification-result.is-ok {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+/* A question, not a verdict: the sheet spells the name differently and only a
+   person can say whether it is the same one. */
+.verification-result.is-ask {
+    border-color: #d97706;
+    background: #fffbeb;
+    color: #92400e;
+    font-weight: 600;
+}
+
+.verification-confirm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* --- Photograph taken at signing ---
+   Square, like everything else. The frame is a fixed aspect ratio so the
+   preview and the photograph that replaces it occupy the same space and the
+   page does not jump at the moment the picture is taken. */
+.selfie-section {
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid var(--kuleni-primary);
+    padding: 16px;
+    margin-bottom: 24px;
+    background: #ffffff;
+}
+
+.selfie-heading {
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    color: var(--kuleni-text);
+    margin: 0 0 8px;
+}
+
+.selfie-intro {
+    font-size: var(--form-font-size);
+    color: var(--kuleni-text);
+    margin: 0 0 14px;
+    line-height: 1.5;
+}
+
+.selfie-frame {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 4 / 3;
+    border: 1px solid #e5e7eb;
+    background: #111827;
+    overflow: hidden;
+}
+
+.selfie-video,
+.selfie-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Only the live preview is mirrored — see the note in _SelfieSection.cshtml. */
+.selfie-video { transform: scaleX(-1); }
+
+/* Never shown; it exists to turn a video frame into an image. */
+.selfie-canvas { display: none; }
+
+.selfie-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.selfie-status {
+    margin-top: 12px;
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+}
+
+.selfie-status.is-ok {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.selfie-status.is-error {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.selfie-hint {
+    margin: 12px 0 0;
+    font-size: var(--form-label-size);
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* --- Authenticator app enrolment ---
+   The QR is the secret, so it is sized to be scanned off a monitor at arm's
+   length and no smaller. Everything is square: a rounded QR is a QR a camera
+   has to work harder at, and the rest of the application does not round. */
+.two-factor-state {
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+    margin: 0 0 6px;
+}
+
+.two-factor-state.is-on { color: var(--kuleni-primary); }
+
+.authenticator-steps {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    font-size: var(--form-font-size);
+    color: var(--kuleni-text);
+    line-height: 1.6;
+}
+
+.authenticator-steps li { margin-bottom: 6px; }
+
+.authenticator-enrol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.authenticator-qr {
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    background: #ffffff;
+    line-height: 0;
+}
+
+.authenticator-qr img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    /* The PNG is a grid of hard squares; smoothing it on the way up is what
+       makes a scan fail. */
+    image-rendering: pixelated;
+}
+
+.authenticator-key {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+/* Broken across lines rather than scrolling sideways: it is read off the
+   screen and typed, so every group has to be visible at once. */
+.authenticator-secret {
+    display: block;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 10px 12px;
+    font-size: var(--form-font-size);
+    letter-spacing: 0.08em;
+    color: var(--kuleni-text);
+    word-break: break-all;
+}
+
+/* --- Applicant/team message thread on the client's status page --- */
+.message-thread {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.message {
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid #d1d5db;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: #ffffff;
+}
+
+/* The applicant's own replies are set apart from the team's, so a thread
+   reads as a conversation rather than a list. */
+.message.is-mine {
+    border-left-color: var(--kuleni-primary);
+    background: #fffaf7;
+}
+
+.message-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.message-who {
+    font-size: var(--form-label-size);
+    font-weight: 700;
+    color: var(--kuleni-text);
+}
+
+.message-when {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--kuleni-gray);
+}
+
+.message-body {
+    font-size: var(--form-font-size);
+    color: var(--kuleni-text);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message-reply { border-top: 1px solid #e5e7eb; padding-top: 14px; }
+
+/* Shown in place of the reply box once the applicant has answered. */
+/* The staff form offers its own Save on every step, so the stepper's
+   last-step submit button stays out of the way. It is still in the markup
+   because the stepper's show/hide logic expects it. */
+.admin-shell #btnSubmit { display: none !important; }
+
+/* The signing box only needs to be as wide as the canvas inside it; left to
+   stretch it dominated the panel and made the pad look off-centre. */
+.signature-pad-container {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.signature-pad-wrapper .signature-pad-container canvas { display: block; }
+
+/* Attachment shown under a message. */
+.message-attachment {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f2f4;
+}
+
+.message-attachment-name {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+    word-break: break-all;
+}
+
+.message-sent {
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid var(--kuleni-success);
+    background: #f9fafb;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+/* --- Uploaded documents, as cards --- */
+.attachment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.attachment-card {
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    background: #ffffff;
+}
+
+.attachment-name {
+    font-weight: 600;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+    margin-bottom: 4px;
+}
+
+.attachment-file {
+    font-size: 11px;
+    color: var(--kuleni-gray);
+    word-break: break-all;
+}
+
+.attachment-meta {
+    font-size: 11px;
+    color: #9ca3af;
+    margin: 4px 0 10px;
+}
+
+/* A signature or initials stored in the submitted form. */
+.submitted-image {
+    max-width: 200px;
+    max-height: 80px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+}
+
+/* Section headings inside the applicant's read-only copy sit closer to
+   their table than a panel heading would. */
+.collapsible-panel .admin-subtitle { margin-top: 18px; }
+.collapsible-panel .admin-subtitle:first-of-type { margin-top: 0; }
+
+/* Unread count on a sidebar item. */
+.nav-count {
+    margin-left: auto;
+    min-width: 18px;
+    padding: 0 4px;
+    background: var(--kuleni-primary);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
+
+/* --- Outstanding signature: menu item, banner, change table, pads --- */
+.app-sidebar-nav a.nav-urgent {
+    border-left: 3px solid var(--kuleni-primary);
+    font-weight: 600;
+}
+
+.signature-callout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Old value struck through, new value carried in the brand colour: the
+   direction of the change is readable without reading the headings. */
+.change-old {
+    color: var(--kuleni-gray);
+    text-decoration: line-through;
+}
+
+.change-new {
+    color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+.signature-block {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.signature-canvas {
+    display: block;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    touch-action: none;
+    max-width: 100%;
+    cursor: crosshair;
+}
+
+.signature-canvas-small { max-width: 300px; }
+
+/* --- One notification, read in full --- */
+.notification-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+    color: var(--kuleni-gray);
+    font-size: var(--form-label-size);
+}
+
+.notification-body {
+    font-size: var(--form-font-size);
+    line-height: 1.6;
+}
+
+.notification-body p { margin: 0 0 12px; }
+
+.notification-actions { margin: 16px 0 0; }
+
+/* --- Development-only test account list on the sign-in page ---
+   Deliberately looks like scaffolding rather than part of the product, so
+   nobody mistakes it for a feature or wonders why customers can see it. */
+.dev-accounts {
+    margin-top: 20px;
+    border: 1px dashed #d1d5db;
+    background: #f9fafb;
+    padding: 12px;
+    text-align: left;
+}
+
+.dev-accounts-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    color: var(--kuleni-gray);
+    margin-bottom: 8px;
+}
+
+.dev-accounts-tag {
+    background: var(--kuleni-gray);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+}
+
+.dev-accounts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dev-accounts-list li + li { margin-top: 6px; }
+
+.dev-account {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.dev-account:hover { border-color: var(--kuleni-primary); }
+
+.dev-account-email {
+    display: block;
+    font-weight: 600;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+    word-break: break-all;
+}
+
+.dev-account-role {
+    display: inline-block;
+    margin: 2px 0;
+    font-size: 11px;
+    color: var(--kuleni-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.dev-account-desc {
+    display: block;
+    font-size: 11px;
+    color: var(--kuleni-gray);
+    line-height: 1.4;
+}
+
+.dev-account-note {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--kuleni-error);
+}
+
+.dev-accounts-foot {
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: var(--kuleni-gray);
+}
+
+/* --- A panel that folds away, using native details/summary --- */
+.collapsible-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    list-style: none;          /* the default triangle, replaced below */
+}
+
+.collapsible-summary::-webkit-details-marker { display: none; }
+
+.collapsible-summary .admin-title { margin: 0; }
+
+.collapsible-hint {
+    color: var(--kuleni-primary);
+    font-size: var(--form-label-size);
+    white-space: nowrap;
+}
+
+/* A chevron that turns, so the control reads as open/closed without relying
+   on the wording beside it. */
+.collapsible-hint::after {
+    content: ' \25BE';
+    display: inline-block;
+}
+
+.collapsible-panel[open] .collapsible-hint::after {
+    transform: rotate(180deg);
+}
+
+/* Only one of the two labels is ever shown, so the control never says
+   "Show" while the panel is open. */
+.collapsible-hint .when-open { display: none; }
+.collapsible-panel[open] .collapsible-hint .when-closed { display: none; }
+.collapsible-panel[open] .collapsible-hint .when-open { display: inline; }
+
+.collapsible-panel[open] .collapsible-summary {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* --- Per-row Actions menu on the admin tables --- */
+.row-menu {
+    position: relative;
+    display: inline-block;
+}
+
+/* Fixed rather than absolute: the table sits in .admin-table-scroll, and an
+   overflow-x:auto ancestor also clips (and scrolls) absolutely positioned
+   children, which cut the menu off inside the table. Fixed escapes that; the
+   script sets top/left from the button each time it opens. */
+.row-menu-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    min-width: 200px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    text-align: left;
+}
+
+/* Every item looks the same whether it is a link or the button inside a
+   small POST form, so the menu reads as one list. */
+.row-menu-item {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: 0;
+    border-bottom: 1px solid #f1f2f4;
+    background: #ffffff;
+    color: var(--kuleni-text);
+    font-size: var(--form-label-size);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.row-menu-item:last-child { border-bottom: 0; }
+
+.row-menu-item:hover {
+    background: #f9fafb;
+    color: var(--kuleni-primary);
+}
+
+.row-menu-item-danger { color: var(--kuleni-error); }
+
+.row-menu-item-danger:hover {
+    background: #fef2f2;
+    color: var(--kuleni-error);
+}
+
+/* An action that is not available yet, shown rather than hidden so it is
+   clear the action exists and what has to happen before it can be taken. */
+.row-menu-item-disabled {
+    color: var(--kuleni-text-muted, #6b7280);
+    cursor: not-allowed;
+}
+
+.row-menu-item-disabled:hover {
+    background: #ffffff;
+    color: var(--kuleni-text-muted, #6b7280);
+}
+
+.row-menu-panel form { margin: 0; }
+
+/* The last column is narrow, so on a phone the panel drops full width under
+   the button rather than off the edge of the screen. */
+@media (max-width: 768px) {
+    .row-menu { display: block; }
+    .row-menu-panel {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-top: 4px;
+        box-shadow: none;
+    }
+}
+
+/* A fieldset used purely to disable everything inside it (read-only form)
+   should not bring the browser's default border, padding or margin with it. */
+.form-fieldset-plain {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0; /* fieldsets otherwise refuse to shrink inside flex/grid */
+}
+
+/* Disabled controls in that state read as "recorded", not "broken". */
+.form-fieldset-plain:disabled input,
+.form-fieldset-plain:disabled select,
+.form-fieldset-plain:disabled textarea {
+    background: #f9fafb;
+    color: var(--kuleni-text);
+    opacity: 1;               /* Safari dims disabled controls by default */
+    -webkit-text-fill-color: var(--kuleni-text);
+    cursor: default;
+}
+
+/* Step through a submitted application on the status page. The steps
+   themselves reuse the application form's stepper styling; this is only the
+   Previous / Next strip underneath. */
+.review-stepper-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.review-stepper-count {
+    color: var(--kuleni-text-muted, #6b7280);
+    font-size: var(--form-label-size);
+}
+
+.review-stepper-nav .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.role-check-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+}
+
+/* Two fields side by side, stacking on a narrow screen. */
+.form-row-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 640px) {
+    .form-row-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.form-hint {
+    display: block;
+    margin-top: 3px;
+    color: var(--kuleni-gray);
+    font-size: 11px;
+}
+
+.admin-subtitle {
+    margin: 0 0 8px;
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    color: var(--kuleni-text);
+}
+
+.admin-intro {
+    margin: 0 0 12px;
+    color: var(--kuleni-gray);
+    font-size: var(--form-label-size);
+}
+
+/* --- Template editor: the form beside its placeholder reference --- */
+.template-editor {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.template-body {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: var(--form-label-size);
+}
+
+.placeholder-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.placeholder-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f2f4;
+}
+
+.placeholder-list code {
+    display: block;
+    color: var(--kuleni-primary);
+    font-size: var(--form-label-size);
+}
+
+.placeholder-desc {
+    display: block;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-text);
+}
+
+.placeholder-example {
+    display: block;
+    font-size: 11px;
+    color: var(--kuleni-gray);
+}
+
+.template-preview { margin-top: 16px; }
+
+.email-preview {
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    background: #ffffff;
+}
+
+.sms-preview {
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    background: #f9fafb;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: var(--form-font-size);
+    margin: 0 0 6px;
+}
+
+/* The reference panel drops below the form once there is no room beside it. */
+@media (max-width: 1024px) {
+    .template-editor { grid-template-columns: minmax(0, 1fr); }
+}
+
+.app-content {
+    flex: 1 1 auto;
+    padding: 0;
+}
+
+/* The form container already centres itself; keep it from doubling up
+   on the shell's own spacing. */
+.app-content .loan-application-container {
+    margin: 0 auto;
+}
+
+/* Narrow screens: collapse to the icon rail by default. */
+@media (max-width: 768px) {
+    .app-sidebar {
+        flex-basis: 56px;
+        width: 56px;
+    }
+    .app-sidebar-title { display: none; }
+    .nav-text { display: none; }
+    .app-sidebar-nav a { justify-content: center; padding: 10px 0; }
+    .topbar-user-name { max-width: 18ch; }
+}
+
+/* --- Top bar: user + status pushed to the far end, sign out last --- */
+/* The auto margin moves here from .topbar-logout so the identity group
+   and the action on it stay adjacent instead of sitting at opposite ends. */
+.topbar-user { margin-left: auto; }
+.topbar-logout { margin: 0; }
+
+/* --- Sidebar icons, section labels and dividers --- */
+.nav-icon svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--kuleni-gray);
+}
+
+.app-sidebar-nav a:hover .nav-icon,
+.app-sidebar-nav a.active .nav-icon {
+    color: var(--kuleni-primary);
+}
+
+/* Separates the application link from the admin links. */
+.nav-divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 8px 0;
+}
+
+.app-shell.is-collapsed .nav-divider { margin: 8px 10px; }
+
+/* ----------------------------------------------------------------
+   Responsive behaviour
+   ---------------------------------------------------------------- */
+
+/* Nothing may force the page wider than the viewport; wide content
+   (tables, the stepper) scrolls inside its own container instead. */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+img, svg { max-width: 100%; }
+
+.app-content .loan-application-container { width: 100%; }
+
+/* Tablet: narrower sidebar, tighter gutters. */
+@media (max-width: 992px) {
+    .app-sidebar { flex-basis: 200px; width: 200px; }
+    .loan-application-container { padding: 12px; }
+    .card-body.p-4 { padding: 1rem !important; }
+}
+
+/* Phone: the sidebar becomes an overlay drawer. A 56px rail would eat a
+   fifth of the screen and the content needs every pixel. */
+@media (max-width: 768px) {
+    .app-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1050;
+        width: 230px;
+        flex-basis: 230px;
+        transform: translateX(-100%);
+        transition: transform 160ms ease;
+        border-right: 1px solid #e5e7eb;
+    }
+
+    /* On phones the toggle opens the drawer rather than shrinking a rail,
+       so the collapsed class means the opposite of what it does on
+       desktop. Labels and icons stay full size inside the drawer. */
+    .app-shell.is-collapsed .app-sidebar,
+    .app-shell.is-open .app-sidebar {
+        transform: translateX(0);
+        width: 230px;
+        flex-basis: 230px;
+    }
+
+    .app-shell.is-collapsed .nav-text,
+    .app-shell.is-open .nav-text { display: inline; }
+
+    .app-shell.is-collapsed .app-sidebar-nav a,
+    .app-shell.is-open .app-sidebar-nav a {
+        justify-content: flex-start;
+        padding: 11px 14px;
+    }
+
+    .app-shell.is-collapsed .app-sidebar-brand,
+    .app-shell.is-open .app-sidebar-brand { padding: 16px 12px; }
+
+    .app-shell.is-collapsed .app-sidebar .kuleni-logo-img,
+    .app-shell.is-open .app-sidebar .kuleni-logo-img { max-height: 40px; }
+
+    .app-main { width: 100%; }
+
+    .app-topbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 12px;
+    }
+
+    .topbar-user-name { max-width: 16ch; }
+
+    .loan-application-container { padding: 10px; }
+
+    /* Currency and phone groups keep their prefix inline rather than
+       wrapping the input onto its own line. */
+    .input-group, .phone-input-wrapper { flex-wrap: nowrap; }
+
+    .admin-header { align-items: stretch; }
+    .admin-header form { width: 100%; }
+    .admin-header input[type="search"] { max-width: none !important; }
+
+    /* Role checkboxes in the users table stack instead of running off. */
+    .admin-actions { gap: 6px; }
+
+    footer .container p { font-size: var(--form-label-size); }
+}
+
+/* Small phone: the account card goes edge to edge. */
+@media (max-width: 480px) {
+    .account-shell { padding: 16px 10px; }
+    .account-card { padding: 18px 14px; }
+    .btn { min-width: 0; }
+    .step { flex: 0 0 50%; }
+    .terms-content { height: 300px; }
+}
+
+/* Backdrop behind the phone drawer. */
+.app-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.45);
+    z-index: 1040;
+}
+
+.app-backdrop[hidden] { display: none; }
+
+@media (min-width: 769px) {
+    /* Desktop never uses the drawer. */
+    .app-backdrop { display: none; }
+}
+
+/* --- Responsive: form internals --- */
+/* The stepper is the widest fixed element in the app. On phones it scrolls
+   horizontally inside its own strip rather than squeezing eight steps into
+   the viewport or pushing the page wide. */
+@media (max-width: 768px) {
+    .stepper-wrapper { margin: 16px 0; }
+
+    .stepper-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .step {
+        flex: 0 0 76px;
+        margin-bottom: 0;
+    }
+
+    .step-number { width: 34px; height: 34px; font-size: 14px; border-width: 2px; }
+    .step.completed .step-number::after,
+    .step.invalid .step-number::after { font-size: 18px; }
+    .step-label { font-size: 10px; line-height: 1.2; }
+
+    /* Next/Back must not overflow their row. */
+    .d-flex.justify-content-between { flex-wrap: wrap; gap: 8px; }
+    .d-flex.justify-content-between .btn { flex: 1 1 auto; }
+
+    /* Signature pads are fixed-width canvases; let them shrink. */
+    .signature-pad-container canvas { max-width: 100%; height: auto; }
+
+    /* Review step: one column. */
+    .review-kv-grid, .review-attachments { grid-template-columns: 1fr; }
+}
+
+/* --- Responsive: admin tables --- */
+/* Stacked cards are for phones. A tablet, or a browser docked beside an
+   editor, has room for the real table and reads far better with it, so the
+   switch happens at 640px rather than 768 — above that the table scrolls
+   sideways inside its own container, which the page already provides.
+
+   When it does stack, the label and its value sit on one line rather than
+   two. A six-column audit row became six two-line blocks, which turned one
+   record into most of a screen. */
+@media (max-width: 640px) {
+    .admin-table thead { display: none; }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        border: 1px solid #e5e7eb;
+        margin-bottom: 10px;
+        background: #ffffff;
+    }
+
+    .admin-table td {
+        border: 0;
+        border-bottom: 1px solid #f1f5f9;
+        padding: 8px 10px;
+    }
+
+    .admin-table td:last-child { border-bottom: 0; }
+
+    .admin-table td {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        text-align: right;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        flex: 0 0 42%;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #9ca3af;
+        text-align: left;
+    }
+
+    /* A cell holding buttons or a stack of its own gets its full width back. */
+    .admin-table td:has(.btn),
+    .admin-table td:has(.admin-actions) {
+        display: block;
+        text-align: left;
+    }
+
+    .admin-table td:has(.btn)::before,
+    .admin-table td:has(.admin-actions)::before {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    /* The permission matrix is the exception: module x CRUD only makes
+       sense as a grid, so it keeps its shape and scrolls. */
+    .permission-matrix thead { display: table-header-group; }
+    .permission-matrix,
+    .permission-matrix tbody,
+    .permission-matrix tr,
+    .permission-matrix td { display: revert; width: auto; }
+    .permission-matrix tr { border: 0; margin: 0; }
+    .permission-matrix td { border: 1px solid #e5e7eb; }
+    .permission-matrix td::before { content: none; }
+    .permission-matrix { min-width: 460px; }
+}
+
+/* ----------------------------------------------------------------
+   Application status (client view)
+   ---------------------------------------------------------------- */
+.status-headline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 12px;
+}
+
+.status-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+    margin-bottom: 2px;
+}
+
+.status-value {
+    font-size: var(--form-font-size);
+    font-weight: 600;
+    color: var(--kuleni-text);
+}
+
+.status-current {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: var(--form-font-size);
+    font-weight: 600;
+    border: 1px solid var(--kuleni-gray);
+    color: var(--kuleni-gray);
+    background: #f9fafb;
+}
+
+.status-message {
+    font-size: var(--form-font-size);
+    margin: 0;
+}
+
+/* Per-status colouring, shared by the client badge and the admin list. */
+.status-submitted, .status-under-review {
+    border-color: rgba(255, 107, 53, 0.45) !important;
+    background: rgba(255, 107, 53, 0.10) !important;
+    color: var(--kuleni-primary-dark) !important;
+}
+
+.status-approved, .status-disbursed {
+    border-color: rgba(16, 185, 129, 0.45) !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    color: #065f46 !important;
+}
+
+.status-declined, .status-cancelled {
+    border-color: rgba(239, 68, 68, 0.45) !important;
+    background: rgba(239, 68, 68, 0.10) !important;
+    color: #991b1b !important;
+}
+
+.status-additional-info-required {
+    border-color: rgba(245, 158, 11, 0.5) !important;
+    background: rgba(245, 158, 11, 0.12) !important;
+    color: #92400e !important;
+}
+
+/* --- Progress track --- */
+.status-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+}
+
+.status-step {
+    flex: 1 1 0;
+    text-align: center;
+    position: relative;
+    padding-top: 20px;
+}
+
+/* The connecting rule is drawn by each step except the first, so the
+   track never extends past either end. */
+.status-step + .status-step::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background: #e5e7eb;
+}
+
+.status-step.is-done + .status-step::before,
+.status-step.is-current::before {
+    background: var(--kuleni-success);
+}
+
+.status-step-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+}
+
+.status-step.is-done .status-step-marker {
+    background: var(--kuleni-success);
+    border-color: var(--kuleni-success);
+}
+
+.status-step.is-current .status-step-marker {
+    background: var(--kuleni-primary);
+    border-color: var(--kuleni-primary);
+}
+
+.status-step-label {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+.status-step.is-current .status-step-label {
+    color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+.status-step.is-done .status-step-label { color: var(--kuleni-success); }
+
+/* Done / Current / Remaining under each stage. Staff need to read the flow at
+   a glance without decoding the colours. */
+.status-step-state {
+    margin-top: 2px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #9ca3af;
+}
+
+.status-step.is-done .status-step-state { color: var(--kuleni-success); }
+.status-step.is-current .status-step-state { color: var(--kuleni-primary); font-weight: 600; }
+
+.status-ended {
+    padding: 10px 12px;
+    font-size: var(--form-font-size);
+    font-weight: 600;
+    border: 1px solid;
+}
+
+/* Admin: keep the status form on one line where there is room. */
+.status-form .form-select { max-width: 190px; }
+.status-form .form-control { max-width: 240px; }
+
+@media (max-width: 768px) {
+    .status-headline { gap: 14px; }
+    .status-track { flex-direction: column; align-items: stretch; gap: 10px; }
+    .status-step { text-align: left; padding: 0 0 0 24px; }
+    .status-step + .status-step::before { display: none; }
+    .status-step-marker { top: 2px; left: 0; transform: none; }
+    .status-form { flex-direction: column; align-items: stretch; }
+    .status-form .form-select, .status-form .form-control { max-width: none; }
+}
+
+/* ----------------------------------------------------------------
+   Admin table toolbar and pagination
+   ---------------------------------------------------------------- */
+/* Search and filters sit above the table, side by side, left aligned.
+   There is no submit button: filtering is live. */
+.table-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.table-toolbar .form-control,
+.table-toolbar .form-select {
+    width: auto;
+    min-width: 180px;
+    max-width: 260px;
+}
+
+.table-pager {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+/* The top pager sits under the toolbar, the bottom one under the table;
+   a rule on the facing edge keeps each attached to the table. */
+.admin-table-scroll + .table-pager { border-top: 1px solid #e5e7eb; }
+.table-pager + .admin-table-scroll { border-top: 1px solid #e5e7eb; }
+
+.pager-info { margin-right: auto; }
+
+.pager-size {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.pager-size .form-select {
+    width: auto;
+    min-width: 68px;
+    padding: 2px 22px 2px 6px;
+}
+
+.pager-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pager-btn {
+    min-width: 0;
+    padding: 3px 10px;
+}
+
+.pager-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.pager-position { white-space: nowrap; }
+
+@media (max-width: 768px) {
+    .table-toolbar .form-control,
+    .table-toolbar .form-select { max-width: none; flex: 1 1 100%; }
+    .pager-info { margin-right: 0; flex: 1 1 100%; }
+}
+
+/* The SMS log. Its outcome column holds sentences rather than a value — what
+   happened, the wording that was carried, and why it did not arrive — so it is
+   given room to be read and the rest of the row fits around it. */
+.sms-outcome { min-width: 280px; max-width: 460px; }
+
+/* The message as it went. Set apart from the tag above and the reason below,
+   and quoted, so it reads as somebody else's words rather than as ours. */
+.sms-body {
+    margin: 6px 0;
+    padding-left: 8px;
+    border-left: 2px solid #e5e7eb;
+    font-style: italic;
+    word-break: break-word;
+}
+
+/* The reason it did not arrive. In the refusal colour, because a message that
+   was never delivered should not be read past. */
+.sms-error {
+    margin: 6px 0;
+    /* The same red the declined tag uses, so a refusal reads as a refusal
+       wherever it appears. */
+    color: #991b1b;
+    word-break: break-word;
+}
+
+/* The gateway's own answer, kept out of the way until somebody wants it.
+   Almost nobody does: the sentence beside it says the same thing in English,
+   and this is for the call to the provider. */
+.sms-raw { margin-top: 4px; }
+
+.sms-raw summary {
+    cursor: pointer;
+    font-size: var(--form-label-size);
+}
+
+.sms-raw code {
+    display: block;
+    margin-top: 4px;
+    padding: 6px 8px;
+    background: #f3f4f6;
+    color: var(--kuleni-gray);
+    font-size: 12px;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* ----------------------------------------------------------------
+   Sidebar menu: light rows, hover, active colour, divider below each
+   ---------------------------------------------------------------- */
+.app-sidebar-nav a {
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.app-sidebar-nav a:hover {
+    background: rgba(255, 107, 53, 0.10);
+    color: var(--kuleni-primary-dark);
+}
+
+.app-sidebar-nav a.active {
+    background: rgba(255, 107, 53, 0.16);
+    color: var(--kuleni-primary-dark);
+    border-left-color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+/* The last item carries the rule too, so the block ends on a divider
+   rather than trailing off. */
+.app-sidebar-nav { padding: 0; }
+
+/* ----------------------------------------------------------------
+   Audit trail and JSON views
+   ---------------------------------------------------------------- */
+.json-view {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px 12px;
+    margin: 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    max-height: 420px;
+    overflow: auto;          /* long payloads scroll here, not the page */
+    white-space: pre;
+}
+
+.json-line { display: block; }
+
+/* The properties the server flagged as different. */
+.json-changed {
+    background: rgba(245, 158, 11, 0.22);
+    box-shadow: -3px 0 0 0 #f59e0b;
+}
+
+.json-old .json-changed {
+    background: rgba(239, 68, 68, 0.16);
+    box-shadow: -3px 0 0 0 var(--kuleni-error);
+}
+
+.json-new .json-changed {
+    background: rgba(16, 185, 129, 0.16);
+    box-shadow: -3px 0 0 0 var(--kuleni-success);
+}
+
+.audit-json-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+    .audit-json-grid { grid-template-columns: 1fr; }
+}
+
+.audit-entry {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    margin-bottom: 8px;
+}
+
+.audit-entry > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: var(--form-font-size);
+    background: #f9fafb;
+}
+
+.audit-entry[open] > summary { border-bottom: 1px solid #e5e7eb; }
+
+.audit-when { color: var(--kuleni-gray); white-space: nowrap; }
+.audit-who { font-weight: 600; }
+.audit-summary { color: var(--kuleni-text); }
+
+.audit-action-create   { border-color: rgba(16,185,129,.45) !important; background: rgba(16,185,129,.12) !important; color: #065f46 !important; }
+.audit-action-update   { border-color: rgba(245,158,11,.5) !important;  background: rgba(245,158,11,.14) !important; color: #92400e !important; }
+.audit-action-delete   { border-color: rgba(239,68,68,.45) !important;  background: rgba(239,68,68,.10) !important; color: #991b1b !important; }
+.audit-action-note     { border-color: rgba(255,107,53,.4) !important;  background: rgba(255,107,53,.10) !important; color: var(--kuleni-primary-dark) !important; }
+.audit-action-read     { border-color: #d1d5db !important;              background: #f3f4f6 !important;              color: var(--kuleni-gray) !important; }
+
+.audit-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    padding: 8px 10px;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.audit-meta span { word-break: break-word; }
+
+.audit-changed {
+    padding: 8px 10px 0;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+/* ----------------------------------------------------------------
+   Application detail: form read-back and attachment viewer
+   ---------------------------------------------------------------- */
+.form-readback { margin-bottom: 18px; }
+
+.form-readback-title {
+    font-size: var(--form-heading-size) !important;
+    font-weight: 600;
+    color: var(--kuleni-primary);
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.raw-payload > summary {
+    cursor: pointer;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    padding: 6px 0;
+}
+
+.attachment-viewer {
+    border: 1px solid #e5e7eb;
+    margin-top: 12px;
+    background: #ffffff;
+}
+
+.attachment-viewer[hidden] { display: none; }
+
+.attachment-viewer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 10px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: var(--form-font-size);
+    font-weight: 600;
+}
+
+.attachment-viewer-body { padding: 10px; }
+
+/* Tall enough to read a page of a PDF without the panel taking over. */
+.attachment-viewer-body object {
+    width: 100%;
+    height: 70vh;
+    border: 1px solid #e5e7eb;
+}
+
+.attachment-viewer-body img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+    .attachment-viewer-body object { height: 55vh; }
+}
+
+/* Audit details expand inside the table row rather than opening a
+   separate view, so the trail keeps the same shape as every other table. */
+.audit-details > summary {
+    cursor: pointer;
+    color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+.audit-details[open] {
+    display: block;
+    padding-top: 6px;
+}
+
+.audit-details .audit-meta {
+    border: 1px solid #e5e7eb;
+    border-bottom: 0;
+    background: #f9fafb;
+}
+
+.audit-details .audit-json-grid { margin-top: 0; }
+
+/* An expanded row is wide; let it use the panel rather than the cell. */
+.admin-table td:has(.audit-details[open]) { min-width: 520px; }
+
+@media (max-width: 768px) {
+    .admin-table td:has(.audit-details[open]) { min-width: 0; }
+}
+
+/* ----------------------------------------------------------------
+   Permission cards (role permissions and the catalogue)
+   ---------------------------------------------------------------- */
+.permission-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+    align-items: start;
+}
+
+.permission-module {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid var(--kuleni-primary);
+}
+
+.permission-module-head {
+    cursor: pointer;
+    padding: 12px 14px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    list-style: none;
+}
+
+/* The default disclosure triangle sits awkwardly next to a block layout;
+   a caret drawn on the right reads better and stays put. */
+.permission-module-head::-webkit-details-marker { display: none; }
+
+.permission-module-head::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    border: 5px solid transparent;
+    border-top-color: var(--kuleni-gray);
+}
+
+.permission-module[open] > .permission-module-head::after {
+    top: 13px;
+    border-top-color: transparent;
+    border-bottom-color: var(--kuleni-gray);
+}
+
+.permission-module-head { position: relative; padding-right: 34px; }
+
+.permission-module-title {
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--kuleni-text);
+}
+
+.permission-module-desc {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    margin-top: 2px;
+}
+
+.permission-module-meta {
+    margin-top: 6px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.permission-count,
+.permission-granted-count {
+    display: inline-block;
+    padding: 1px 8px;
+    font-size: var(--form-label-size);
+    background: #eef2f7;
+    color: var(--kuleni-gray);
+    border: 1px solid #e5e7eb;
+}
+
+.permission-granted-count {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #065f46;
+}
+
+.permission-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.permission-row:last-child { border-bottom: 0; }
+
+.permission-row-main { flex: 1 1 auto; min-width: 0; }
+
+.permission-row-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.permission-action {
+    font-weight: 700;
+    font-size: var(--form-font-size);
+    color: var(--kuleni-text);
+}
+
+/* The claim value, shown so an administrator can match what they see here
+   with what appears in a token or a HasPermission attribute. */
+.permission-code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.6875rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    padding: 1px 6px;
+    color: #4b5563;
+}
+
+.permission-row-desc {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    margin-top: 3px;
+}
+
+.permission-row-state {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+
+.permission-state {
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    padding: 2px 8px;
+    border: 1px solid;
+    white-space: nowrap;
+}
+
+.permission-state.is-granted {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #065f46;
+}
+
+.permission-state.is-denied {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+    color: var(--kuleni-gray);
+}
+
+.permission-switch { margin: 0; cursor: pointer; }
+
+@media (max-width: 576px) {
+    .permission-modules { grid-template-columns: 1fr; }
+    .permission-row { flex-wrap: wrap; }
+}
+
+/* ----------------------------------------------------------------
+   Role cards
+
+   The roles list, as one collapsed card per role rather than a table.
+   Deliberately the same card as the permission modules next door —
+   a role and a module read as the same kind of thing, and the caret,
+   the header tint and the accent edge are already learnt there.
+
+   Three across. A role is picked out of the list by its name, and a
+   single column made a short list into a long scroll — the description
+   wraps to two lines in a third of the width, which is a fair trade for
+   seeing three times as many at once.
+
+   Two on a tablet and one on a phone, because a card holding a name, a
+   sentence and two counts has nothing left to give below that.
+   ---------------------------------------------------------------- */
+.role-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    align-items: start;
+}
+
+@media (max-width: 1200px) {
+    .role-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .role-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* The empty state is a sentence, not a card, so it spans the row rather
+   than sitting in the first column with two gaps beside it. */
+.role-cards-empty {
+    grid-column: 1 / -1;
+}
+
+.role-cards-empty {
+    padding: 14px;
+    color: var(--kuleni-gray);
+    font-size: var(--form-font-size);
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.role-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid var(--kuleni-primary);
+}
+
+.role-card-head {
+    cursor: pointer;
+    padding: 12px 34px 12px 14px;
+    background: #f9fafb;
+    list-style: none;
+    position: relative;
+}
+
+/* The card is shut far more often than it is open, so the header only
+   grows a dividing line once there is something below it to divide. */
+.role-card[open] > .role-card-head {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.role-card-head::-webkit-details-marker { display: none; }
+
+.role-card-head::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    border: 5px solid transparent;
+    border-top-color: var(--kuleni-gray);
+}
+
+.role-card[open] > .role-card-head::after {
+    top: 13px;
+    border-top-color: transparent;
+    border-bottom-color: var(--kuleni-gray);
+}
+
+.role-card-title {
+    font-size: var(--form-heading-size);
+    font-weight: 700;
+    color: var(--kuleni-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.role-card-desc {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    margin-top: 2px;
+}
+
+.role-card-meta {
+    margin-top: 6px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.role-stat {
+    display: inline-block;
+    padding: 1px 8px;
+    font-size: var(--form-label-size);
+    background: #eef2f7;
+    color: var(--kuleni-gray);
+    border: 1px solid #e5e7eb;
+}
+
+.role-card-body { padding: 12px 14px; }
+
+/* ------------------------------------------------------------------
+   Income & Expenditure (Section F)
+
+   A transcription of the workbook sheet, so it reads as a sheet: rows
+   under group headings, entered columns beside a worked-out one, and
+   totals set apart from the rows they add up.
+
+   Sizes come from the three type-scale variables, never from a number
+   written here — this is a table sitting inside the form, and it has to
+   read as part of it.
+   ------------------------------------------------------------------ */
+
+.ie-table,
+.ie-summary {
+    border: 1px solid #d1d5db;
+    font-size: var(--form-font-size);
+}
+
+.ie-table thead th {
+    background-color: #1f3864;
+    color: #ffffff;
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    border-color: #1f3864;
+    white-space: nowrap;
+}
+
+.ie-table th,
+.ie-table td {
+    vertical-align: middle;
+    border-radius: 0;
+}
+
+.ie-table .ie-row-label {
+    font-weight: 500;
+    min-width: 220px;
+}
+
+.ie-group-heading th {
+    background-color: #e5e7eb;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: var(--form-label-size);
+    font-weight: 700;
+    color: #1f3864;
+}
+
+.ie-table .ie-input {
+    border-radius: 0;
+    text-align: right;
+    min-width: 120px;
+}
+
+.ie-table .ie-input[readonly] {
+    background-color: #f3f4f6;
+}
+
+.ie-combined {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    background-color: #f9fafb;
+    white-space: nowrap;
+}
+
+.ie-total-row th,
+.ie-total-row td {
+    background-color: #eef2ff;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ie-total-row th {
+    text-align: left;
+}
+
+.ie-summary th {
+    font-weight: 500;
+    width: 55%;
+}
+
+.ie-summary td {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The verdict the sheet arrives at, stated plainly rather than colour alone. */
+.ie-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 0;
+    font-size: var(--form-label-size);
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.ie-status-approved {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #166534;
+}
+
+.ie-status-declined {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #991b1b;
+}
+
+.ie-status-pending {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #9ca3af;
+}
+
+/* ------------------------------------------------------------------
+   One third limit calculator
+
+   The page uses the shared admin shell, panels and headings. Only the
+   result table needs anything of its own: figures right-aligned, and
+   the two lines that matter most set apart from the workings above.
+   ------------------------------------------------------------------ */
+
+.calc-table th {
+    font-weight: 500;
+    width: 60%;
+}
+
+.calc-table td {
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.calc-table .calc-divider th,
+.calc-table .calc-divider td {
+    border-top: 2px solid #d1d5db;
+}
+
+.calc-table .calc-highlight th,
+.calc-table .calc-highlight td {
+    background-color: #eef2ff;
+    font-weight: 700;
+}
+
+/* ------------------------------------------------------------------
+   Job category suggestions
+
+   Drawn below the field rather than in a native datalist, which cannot
+   be styled and so looked nothing like the rest of the form. Flat and
+   square, on the form's own type scale, using the same navy and greys
+   as the tables above it.
+   ------------------------------------------------------------------ */
+
+.suggest-holder {
+    position: relative;
+}
+
+.suggest-list {
+    position: absolute;
+    z-index: 20;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 2px 0 0;
+    padding: 0;
+    list-style: none;
+    max-height: 260px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 1px solid #1f3864;
+    border-radius: 0;
+}
+
+.suggest-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: var(--form-font-size);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.suggest-item:last-child {
+    border-bottom: 0;
+}
+
+.suggest-item:hover,
+.suggest-item.is-active {
+    background-color: #eef2ff;
+}
+
+.suggest-name {
+    color: var(--kuleni-text, #111827);
+}
+
+/* The part that was typed, so why it matched is obvious. */
+.suggest-name mark {
+    padding: 0;
+    background-color: transparent;
+    color: #1f3864;
+    font-weight: 700;
+}
+
+.suggest-sector {
+    flex-shrink: 0;
+    font-size: var(--form-label-size);
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.suggest-empty {
+    padding: 6px 10px;
+    font-size: var(--form-font-size);
+    color: #6b7280;
+}
+
+/* The result is focused when it appears, so the page can be taken there and
+   a screen reader reads it next. That focus is programmatic, not a keyboard
+   landing, so it should not draw an outline. */
+#affordabilityResult:focus {
+    outline: none;
+}
+
+/* A menu item that is a small form — choosing who an application moves to
+   before it goes anywhere. Sits inside the panel like the other items. */
+.row-menu-form {
+    padding: 8px 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.row-menu-label {
+    display: block;
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.row-menu-form .form-select {
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+/* ------------------------------------------------------------------
+   Client survey
+
+   Public, so it carries its own width rather than sitting in the app
+   shell. Everything else — panels, headings, type scale — is the
+   system's own.
+   ------------------------------------------------------------------ */
+
+.survey-page {
+    max-width: 820px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+
+.survey-rating legend {
+    float: none;
+    width: auto;
+}
+
+.survey-faces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* The face is the label, so the whole tile is the target — easier to hit
+   on a phone than a radio dot. */
+.survey-face {
+    flex: 1 1 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+}
+
+.survey-face:hover {
+    background-color: #eef2ff;
+}
+
+/* Visually hidden, not removed: it is still what the keyboard moves
+   between and what a screen reader announces. */
+.survey-face-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.survey-face-mark {
+    font-size: 1.75rem;
+    line-height: 1;
+    filter: grayscale(100%);
+    opacity: .55;
+}
+
+.survey-face-text {
+    font-size: var(--form-label-size);
+    color: #6b7280;
+    text-align: center;
+}
+
+.survey-face:has(.survey-face-input:checked) {
+    border-color: #1f3864;
+    background-color: #eef2ff;
+}
+
+.survey-face:has(.survey-face-input:checked) .survey-face-mark {
+    filter: none;
+    opacity: 1;
+}
+
+.survey-face:has(.survey-face-input:checked) .survey-face-text {
+    color: #1f3864;
+    font-weight: 700;
+}
+
+/* Keyboard focus has to be visible when the control itself is not. */
+.survey-face:has(.survey-face-input:focus-visible) {
+    outline: 2px solid #1f3864;
+    outline-offset: 2px;
+}
+
+/* A heading inside a table, marking the start of a group of rows. Kept in
+   the same table so the search and pager still work across all of them. */
+.admin-group-row th {
+    background-color: #e5e7eb;
+    color: #1f3864;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: var(--form-label-size);
+    font-weight: 700;
+}
+
+/* ===================================================================
+   KPI dashboard
+   Flat and square like everything else. The charts are CSS boxes, not a
+   library: a bar is a div with a height, and one fewer script on the page
+   is one fewer thing to load before the figures can be read.
+   =================================================================== */
+
+.dashboard-range {
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.dashboard-range-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dashboard-range-field .form-label {
+    margin: 0;
+}
+
+/* Pushed to the far end so the range controls and the exports do not read
+   as one row of equal things. */
+.dashboard-exports {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dashboard-exports-label {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+.dashboard-section {
+    margin-top: 28px;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* --- Headline figures --- */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.kpi-grid-tight {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    margin-bottom: 0;
+}
+
+.kpi-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+
+    /* The accent edge is the only colour on a card, so a wall of them still
+       reads as a wall of figures rather than a wall of paint. */
+    border-left: 3px solid var(--kuleni-primary);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.kpi-card.kpi-good { border-left-color: var(--kuleni-success); }
+.kpi-card.kpi-bad { border-left-color: var(--kuleni-error); }
+
+.kpi-label {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.kpi-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.kpi-hint {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+/* --- Column chart --- */
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 220px;
+    padding-top: 8px;
+    overflow-x: auto;
+}
+
+.chart-bar-group {
+    flex: 1 1 0;
+    min-width: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+/* The two bars share a baseline and overlap, so approved reads as a part of
+   started rather than as a separate quantity standing next to it. */
+.chart-bar-stack {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.chart-bar {
+    position: absolute;
+    bottom: 0;
+    width: 70%;
+    background: var(--kuleni-primary-light);
+    min-height: 2px;
+}
+
+.chart-bar-approved {
+    width: 36%;
+    background: var(--kuleni-success);
+}
+
+.chart-bar-label,
+.chart-bar-value {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    white-space: nowrap;
+}
+
+.chart-bar-value {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.chart-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.chart-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+}
+
+.chart-swatch {
+    width: 12px;
+    height: 12px;
+    background: var(--kuleni-primary-light);
+    display: inline-block;
+}
+
+.chart-swatch-approved { background: var(--kuleni-success); }
+
+/* --- Horizontal bars, for breakdowns --- */
+.chart-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chart-row {
+    display: grid;
+    grid-template-columns: minmax(90px, 34%) 1fr auto;
+    align-items: center;
+    gap: 10px;
+}
+
+.chart-row-label {
+    font-size: var(--form-label-size);
+    color: #1f2937;
+    overflow-wrap: anywhere;
+}
+
+.chart-row-track {
+    background: #f3f4f6;
+    height: 14px;
+    display: block;
+}
+
+.chart-row-fill {
+    display: block;
+    height: 100%;
+    background: var(--kuleni-primary);
+    min-width: 2px;
+}
+
+.chart-row-value {
+    font-size: var(--form-label-size);
+    font-weight: 600;
+    color: #1f2937;
+    min-width: 2.5em;
+    text-align: right;
+}
+
+@media (max-width: 640px) {
+    .dashboard-exports {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .chart-bars {
+        height: 180px;
+    }
+
+    .chart-bar-group {
+        min-width: 38px;
+    }
+
+    /* The label column stops earning its width on a narrow screen. */
+    .chart-row {
+        grid-template-columns: minmax(72px, 42%) 1fr auto;
+    }
+}
+
+/* The person picker needs more width than a date does — names are longer
+   than 10/10/2026 and truncating them defeats the point of choosing one. */
+.dashboard-range-person {
+    min-width: 200px;
+}
+
+
+/* ----------------------------------------------------------------
+   Reading a document is not editing it
+
+   A disabled fieldset is how a locked application switches its form
+   off, and Bootstrap turns every .btn inside one grey-blue with
+   pointer-events: none — anchors included, which is why making these
+   anchors was not enough on its own. That rule is right for the
+   form's own controls and wrong for View and Download: those only
+   read, and anyone who can open the application may use them. They
+   are matched by what they do, so both the staff card and the
+   applicant's card are covered wherever they sit.
+   ---------------------------------------------------------------- */
+fieldset:disabled a.btn.attachment-view,
+fieldset:disabled a.btn[href*="handler=File"],
+fieldset:disabled .attachment-viewer .btn {
+    pointer-events: auto;
+    opacity: 1;
+    cursor: pointer;
+}
+
+fieldset:disabled a.btn-primary.attachment-view {
+    background-color: var(--kuleni-primary);
+    border-color: var(--kuleni-primary);
+    color: #ffffff;
+}
+
+fieldset:disabled a.btn-outline-danger[href*="handler=File"],
+fieldset:disabled .attachment-viewer .btn-outline-danger {
+    background-color: transparent;
+    border-color: var(--kuleni-primary);
+    color: var(--kuleni-primary);
+}
+
+/* ----------------------------------------------------------------
+   An ID number we already know
+
+   Shown under the ID box on the calculator when the client already
+   has an application. A notice, not an error: starting a second
+   application is allowed, it is just rarely what was meant.
+   ---------------------------------------------------------------- */
+.af-existing {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--kuleni-primary);
+    background-color: #fff4ef;
+    font-size: var(--form-font-size);
+}
+
+.af-existing a {
+    color: var(--kuleni-primary);
+    font-weight: 600;
+}
+
+.af-existing-status {
+    color: #6c757d;
+}
+
+/* ----------------------------------------------------------------
+   Asking before something that cannot be undone
+
+   The browser's own confirm box carried the site's address across the
+   top, could not be styled and could not say more than one line. This
+   is the same question in the application's own voice: a heading that
+   names what is about to happen, a line saying what it costs, and the
+   safe answer on the left where the eye lands first.
+
+   Flat and square, like everything else.
+   ---------------------------------------------------------------- */
+.confirm-dialog {
+    width: min(440px, calc(100vw - 32px));
+    padding: 0;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: var(--kuleni-text);
+}
+
+.confirm-dialog::backdrop {
+    background: rgba(31, 41, 55, 0.55);
+}
+
+.confirm-dialog-body { padding: 20px; }
+
+.confirm-dialog-title {
+    margin: 0 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--kuleni-primary);
+    font-size: var(--form-heading-size);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.confirm-dialog-detail {
+    margin: 0;
+    padding-left: 13px;
+    color: var(--kuleni-gray);
+    font-size: var(--form-font-size);
+}
+
+.confirm-dialog-detail[hidden] { display: none; }
+
+/* Cancel first, and it holds the focus, so the dangerous answer is
+   never the one a stray return key gives. */
+.confirm-dialog-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+    .confirm-dialog-actions { flex-direction: column-reverse; }
+    .confirm-dialog-actions .btn { width: 100%; }
+}
+
+/* The way behind the dashboard's figures. Pushed to the right of the
+   header so it reads as the next thing to do rather than part of the
+   heading. */
+.dashboard-full-report { margin-left: auto; }
+
+/* A ticked box on a read-only form.
+   A disabled checkbox is drawn faintly by the browser, and on the flat
+   square styling that left the chosen purpose as an orange outline with
+   nothing in it — indistinguishable from unchosen at a glance, on the one
+   field that decides how the loan is paid out. The mark is drawn here so
+   it reads as ticked whether or not the control can be clicked. */
+.form-check-input:checked,
+fieldset[disabled] .form-check-input:checked,
+.form-check-input:disabled:checked {
+    background-color: #E8590C;
+    border-color: #E8590C;
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+/* The label beside it stops looking greyed out too: what was chosen is
+   the point of the page. */
+fieldset[disabled] .form-check-input:checked + .form-check-label {
+    color: #212529;
+    font-weight: 600;
+}

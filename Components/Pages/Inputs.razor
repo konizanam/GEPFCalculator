@@ -1,0 +1,329 @@
+@page "/"
+@using System.Globalization
+@using GEPF.Services
+@rendermode InteractiveServer
+@inject InputValues inputvalues
+@inject NavigationManager NavigationManager
+
+<PageTitle>Your details - Kuleni Retirement Calculator</PageTitle>
+
+@*
+    The house pattern, taken from the loan application's own screens:
+    loan-application-container admin-shell, an admin-header carrying the
+    title, then panels of fields laid out as a Bootstrap row of columns with
+    form-label above form-control or form-select. Nothing sets its own font
+    size or colour - those come from site.css.
+
+    Mandatory fields mark themselves green as they are answered and red once
+    left empty. That is not something this form opts into: the fields are
+    marked required and live-validation.js does the rest.
+*@
+<div class="loan-application-container admin-shell">
+    <div class="admin-header">
+        <h1 class="admin-title">Retirement fund member option</h1>
+    </div>
+
+    <div class="admin-panel">
+        <p class="admin-intro mb-0">
+            Tell us what you have and what you would like to retire on, and this
+            works out whether the two meet &mdash; and by how much they do not.
+            Nothing here commits you to anything.
+        </p>
+    </div>
+
+    <div class="admin-panel">
+        <h2 class="admin-subtitle">About you</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label" for="dob">
+                    Date of birth <span class="text-danger">*</span>
+                </label>
+                <input type="date" class="form-control" id="dob" required
+                       @bind="inputvalues.DOB" @bind:format="yyyy-MM-dd" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="gender">
+                    Gender <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" id="gender" required
+                        @bind="inputvalues.GenderSelection" @bind:after="UpdateDrawdown">
+                    <option value="">Choose...</option>
+                    @foreach (var g in genders)
+                    {
+                        <option value="@g">@g</option>
+                    }
+                </select>
+                <div class="form-text">
+                    A guaranteed annuity pays a man and a woman of the same age
+                    differently, so the drawdown below follows this answer.
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="retirementAge">
+                    Retirement age <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" id="retirementAge" required
+                        @bind="inputvalues.RetAge" @bind:after="UpdateDrawdown">
+                    @foreach (var age in retirementages)
+                    {
+                        <option value="@age">@age</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-panel">
+        <h2 class="admin-subtitle">What you have</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label" for="annualSalary">
+                    Annual salary (R) <span class="text-danger">*</span>
+                </label>
+                <input type="number" step="0.01" min="0" class="form-control" id="annualSalary"
+                       required @bind="inputvalues.AnnualSalary" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="fund">
+                    Fund <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" id="fund" required
+                        @bind="inputvalues.FundSelection" @bind:after="ChangeFund">
+                    @foreach (var fund in funds)
+                    {
+                        <option value="@fund">@fund</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="retirementSavings">
+                    Retirement savings so far (R) <span class="text-danger">*</span>
+                </label>
+                <input type="number" step="0.01" min="0" class="form-control" id="retirementSavings"
+                       required @bind="inputvalues.RetirementSavings" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="contribution">
+                    Your contribution <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" id="contribution" required
+                        @bind="inputvalues.ContributionSelection" @bind:after="UpdateContribution">
+                    @foreach (var c in fundcont)
+                    {
+                        <option value="@c.ToString(CultureInfo.InvariantCulture)">@c.ToString("P1")</option>
+                    }
+                </select>
+                @if (ContributionsFixed)
+                {
+                    <div class="form-text">
+                        The fund you have chosen sets this, so there is nothing to choose.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-panel">
+        <h2 class="admin-subtitle">What you want to retire on</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label" for="annuity">
+                    Annuity <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" id="annuity" required
+                        @bind="inputvalues.AnnuitySelection" @bind:after="UpdateDrawdown">
+                    @foreach (var a in anntype)
+                    {
+                        <option value="@a">@a</option>
+                    }
+                </select>
+            </div>
+
+            @* A guaranteed annuity fixes the drawdown from your age and gender,
+               so it is shown rather than asked for. A living annuity is the one
+               where the choice is yours. readonly, never disabled - a locked
+               field still says what it holds. *@
+            @if (inputvalues.AnnuitySelection == "Guaranteed Annuity")
+            {
+                <div class="col-md-4">
+                    <label class="form-label" for="drawdown">Drawdown</label>
+                    <input type="text" class="form-control" id="drawdown" readonly
+                           value="@(inputvalues.DrawDownSelection.ToString("P1"))" />
+                    <div class="form-text">Set by your retirement age and gender.</div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-4">
+                    <label class="form-label" for="drawdown">
+                        Drawdown <span class="text-danger">*</span>
+                    </label>
+                    <select class="form-select" id="drawdown" required @bind="inputvalues.DrawDownSelection">
+                        @foreach (var d in drawdowns)
+                        {
+                            <option value="@d.ToString(CultureInfo.InvariantCulture)">@d.ToString("P1")</option>
+                        }
+                    </select>
+                    <div class="form-text">How much of the fund you draw each year.</div>
+                </div>
+            }
+
+            <div class="col-md-4">
+                <label class="form-label" for="nrr">
+                    Required net replacement ratio <span class="text-danger">*</span>
+                </label>
+                <input type="number" step="0.01" min="0" max="1" class="form-control" id="nrr"
+                       required @bind="inputvalues.NRR" />
+                <div class="form-text">
+                    The share of your final take-home pay you want your pension to
+                    replace, as a fraction: 0.8 is 80%.
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-actions mt-4">
+            <button type="button" class="btn btn-primary" @onclick="Calculate">Calculate</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    List<string> genders = ["Male", "Female"];
+    List<string> funds = ["GEPF", "Members of Parliament", "Kuleni Preservation Fund Balanced", "Kuleni Preservation Fund Cash"];
+    List<double> fundcont = [0.075, 0.1, 0.125];
+    List<string> anntype = ["Guaranteed Annuity", "Living Annuity"];
+    List<double> drawdowns = [0.07];
+    List<double> FemaleDrawdowns = [0.066, 0.071, 0.077, 0.085, 0.095];
+    List<double> MaleDrawdowns = [0.073, 0.079, 0.087, 0.095, 0.106];
+    List<int> retirementages = [50, 55, 60, 65, 70];
+
+    /// <summary>A fund that contributes nothing, or a fixed amount, leaves nothing to pick.</summary>
+    private bool ContributionsFixed => fundcont.Count == 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // The contributions on offer are the chosen fund's, and the drawdown a
+        // guaranteed annuity pays follows the age and gender above it. Both were
+        // only ever worked out when something changed, so a form opened and read
+        // as it stands showed a drawdown of 0.0%.
+        await ChangeFund();
+
+        if (inputvalues.DrawDownSelection == 0)
+        {
+            await UpdateDrawdown();
+        }
+    }
+
+    private void Calculate()
+    {
+        inputvalues.Answered = true;
+        NavigationManager.NavigateTo("/Results");
+    }
+
+    private async Task ChangeFund()
+    {
+        switch (inputvalues.FundSelection)
+        {
+            case "GEPF":
+                fundcont = [0.075, 0.1, 0.125];
+                break;
+            case "Members of Parliament":
+                fundcont = [0.1];
+                inputvalues.ContributionSelection = 0.1;
+                break;
+            case "Kuleni Preservation Fund Cash":
+                fundcont = [0];
+                inputvalues.ContributionSelection = 0;
+                break;
+            case "Kuleni Preservation Fund Balanced":
+                fundcont = [0];
+                inputvalues.ContributionSelection = 0;
+                break;
+        }
+
+        // What is shown and what is used have to be the same thing. Coming back
+        // to GEPF from a fund that contributes nothing left the box empty while
+        // the calculation still ran on the nothing behind it - the same guard
+        // the drawdown list already had.
+        if (!fundcont.Contains(inputvalues.ContributionSelection))
+        {
+            inputvalues.ContributionSelection = fundcont[0];
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task UpdateDrawdown()
+    {
+        switch (inputvalues.AnnuitySelection)
+        {
+            case "Guaranteed Annuity":
+
+                int index = (inputvalues.RetAge - 50) / 5;
+
+                if (inputvalues.GenderSelection == "Female")
+                {
+                    drawdowns = [FemaleDrawdowns[index]];
+                }
+                else if (inputvalues.GenderSelection == "Male")
+                {
+                    drawdowns = [MaleDrawdowns[index]];
+                }
+                else
+                {
+                    drawdowns = [0.084];
+                }
+
+                inputvalues.DrawDownSelection = drawdowns[0];
+                break;
+
+            case "Living Annuity":
+
+                drawdowns = [0.05, 0.06, 0.07, 0.08, 0.09,
+                         0.10, 0.11, 0.12, 0.13, 0.14, 0.15];
+
+                if (!drawdowns.Contains(inputvalues.DrawDownSelection))
+                {
+                    inputvalues.DrawDownSelection = drawdowns[0];
+                }
+
+                break;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task UpdateContribution()
+    {
+        switch (inputvalues.FundSelection)
+        {
+            case "Members of Parliament":
+                inputvalues.ContributionSelection = 0.1;
+                fundcont = [0.1];
+                break;
+
+            case "Kuleni Preservation Fund Cash":
+                inputvalues.ContributionSelection = 0;
+                fundcont = [0];
+                break;
+
+            case "Kuleni Preservation Fund Balanced":
+                inputvalues.ContributionSelection = 0;
+                fundcont = [0];
+                break;
+            case "GEPF":
+                fundcont = [0.075, 0.1, 0.125];
+                break;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="icon" type="image/png" href="images/kuleni-logo-favicon.png" />
+    <link rel="apple-touch-icon" href="images/kuleni-logo-favicon.png" />
+    @* The same three, in the same order, as the loan application: Bootstrap
+       first, the house stylesheet over it, and the little that belongs to
+       this app alone last. *@
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="app.css" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveServer" />
+
+    <div id="blazor-error-ui">
+        Something went wrong.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">&#128473;</a>
+    </div>
+
+    <script src="_framework/blazor.web.js"></script>
+    @* Mandatory fields mark themselves green as they are filled in and red
+       once left empty — the same behaviour as every form in the loan
+       application, from the same file. *@
+    <script src="js/live-validation.js"></script>
+    <script src="js/sidebar.js"></script>
+</body>
+
+</html>

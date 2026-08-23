@@ -1,0 +1,48 @@
+/*
+ * What belongs to this app alone. Everything else — the colours, the type
+ * sizes, the panels, the buttons — comes from css/site.css, the loan
+ * application's own stylesheet, and is not restated here.
+ *
+ * Flat and square: no border-radius, no box-shadow, anywhere.
+ */
+
+/* Blazor's own two pieces of furniture, dressed in the house colours. */
+#blazor-error-ui {
+    background: rgba(239, 68, 68, 0.12);
+    border-top: 1px solid var(--kuleni-error);
+    color: var(--kuleni-text);
+    font-size: var(--form-font-size);
+    bottom: 0;
+    display: none;
+    left: 0;
+    padding: 10px 16px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+    top: 8px;
+}
+
+.blazor-error-boundary {
+    background: var(--kuleni-error);
+    padding: 12px 16px;
+    color: #ffffff;
+}
+
+.blazor-error-boundary::after {
+    content: "Something went wrong.";
+}
+
+/* A line of explanation under a figure that has been worked out rather than
+   typed in. Bootstrap's form-text says the same thing under a field being
+   filled in; this is for the ones being read. */
+.calc-note {
+    font-size: var(--form-label-size);
+    color: var(--kuleni-gray);
+    margin: 8px 0 0;
+}

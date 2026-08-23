@@ -1,0 +1,72 @@
+@inherits LayoutComponentBase
+
+@*
+    The loan application's shell, and nothing of it invented here: a white
+    sidebar carrying the logo and the menu, a top bar with the toggle that
+    collapses it, and the page itself in the column beside them. The classes
+    are site.css's own, so this app is the same application to look at.
+*@
+<div class="app-shell" id="appShell">
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="app-sidebar-brand">
+            <a class="app-sidebar-logo-link" href="" title="Kuleni Financial Services">
+                <div class="kuleni-logo">
+                    <img src="images/kuleni-logo.png" alt="Kuleni Financial Services" class="kuleni-logo-img" />
+                </div>
+            </a>
+            <div class="app-sidebar-title">Retirement Calculator</div>
+        </div>
+
+        <nav class="app-sidebar-nav" aria-label="Main">
+            <NavLink href="" Match="NavLinkMatch.All" title="Your details">
+                @* Document icon *@
+                <span class="nav-icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M3.5 1.5h6l3 3v10h-9z" />
+                        <path d="M9.5 1.5v3h3" />
+                        <path d="M5.5 8h5M5.5 11h5" />
+                    </svg>
+                </span>
+                <span class="nav-text">Your details</span>
+            </NavLink>
+
+            <NavLink href="Results" title="Results">
+                @* Bar chart icon *@
+                <span class="nav-icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M2.5 13.5h11" />
+                        <path d="M4.5 13.5v-5M8 13.5v-9M11.5 13.5v-3" />
+                    </svg>
+                </span>
+                <span class="nav-text">Results</span>
+            </NavLink>
+        </nav>
+    </aside>
+
+    <div class="app-main">
+        <div class="app-topbar">
+            <button type="button" class="app-sidebar-toggle" id="sidebarToggle"
+                    aria-label="Collapse or expand the menu" aria-expanded="true">
+                <span aria-hidden="true">&#9776;</span>
+            </button>
+
+            <div class="topbar-user">
+                <span class="topbar-user-name">Retirement fund member options</span>
+            </div>
+        </div>
+
+        <main role="main" class="app-content">
+            @Body
+        </main>
+    </div>
+</div>
+
+<footer class="mt-5 py-4 bg-light">
+    <div class="container text-center">
+        <p class="text-muted mb-0">
+            &copy; @DateTime.Now.Year Kuleni Financial Services. All rights reserved.
+            <span class="mx-2">|</span>
+            Developed By <a href="https://it.konizanam.com" target="_blank" rel="noopener noreferrer">Koniza Information Technology</a>
+        </p>
+    </div>
+</footer>

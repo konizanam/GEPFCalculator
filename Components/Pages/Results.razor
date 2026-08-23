@@ -1,0 +1,541 @@
+@page "/Results"
+@rendermode InteractiveServer
+@using GEPF.Services
+@inject InputValues inputvalues
+@inject NavigationManager NavMan
+
+<PageTitle>Results - Kuleni Retirement Calculator</PageTitle>
+
+@*
+    The figures read back the way the loan application reads an application
+    back: a highlight carrying what has to be done about them, and the numbers
+    themselves as a grid of key and value. Same shell, same panels, same
+    buttons as the form they came from.
+*@
+<div class="loan-application-container admin-shell">
+    <div class="admin-header">
+        <h1 class="admin-title">Results</h1>
+        <button type="button" class="btn btn-outline-danger" @onclick="BackToInputs">Your details</button>
+    </div>
+
+    @* Nothing can be worked out without these, so they are said plainly rather
+       than answered with a page of zeros. *@
+    @if (NoDOB)
+    {
+        <div class="alert alert-danger" role="alert">You need to enter a date of birth.</div>
+    }
+    @if (NoSalary)
+    {
+        <div class="alert alert-danger" role="alert">You need to enter a non-zero annual salary.</div>
+    }
+    @if (NoNRR)
+    {
+        <div class="alert alert-danger" role="alert">You need to enter a net replacement ratio.</div>
+    }
+    @if (NoDrawDown)
+    {
+        <div class="alert alert-danger" role="alert">You need to enter a drawdown value.</div>
+    }
+    @if (!Fundselected)
+    {
+        <div class="alert alert-danger" role="alert">
+            You need to select a fund for the calculation growth to be determined.
+        </div>
+    }
+
+    @if (calccomplete)
+    {
+        <div class="admin-panel">
+            <h2 class="admin-subtitle">What you would retire on</h2>
+
+            @if (normalmessages)
+            {
+                <div class="review-highlight">
+                    <div class="review-highlight-title">To reach the ratio you asked for</div>
+                    <ul class="review-highlight-list">
+                        @if (inputvalues.FundSelection != "Kuleni Preservation Fund Balanced"
+                             && inputvalues.FundSelection != "Kuleni Preservation Fund Cash")
+                        {
+                            <li>
+                                You need a fund top up of @($"R {TopUpValue:N0}"),
+                                or you need to increase your contribution
+                                by @($"{Cont_Inc_To_Use:P2}").
+                            </li>
+                        }
+                        else if (TopUpValue == -999)
+                        {
+                            <li>
+                                You haven't got any savings in this account, and because
+                                there are no contributions, you will never accumulate anything.
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                You need a fund top up of @($"R {TopUpValue:N0}").
+                                Contributions do not apply to the fund selected.
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="review-kv-grid">
+                    <div class="review-kv">
+                        <div class="review-k">Your initial closing fund value on retirement</div>
+                        <div class="review-v">@($"R {InitialFinalFundValue:N0}")</div>
+                    </div>
+                    <div class="review-kv">
+                        <div class="review-k">Your initial net replacement ratio</div>
+                        <div class="review-v">@($"{InitNRR:N2} %")</div>
+                    </div>
+                    <div class="review-kv">
+                        <div class="review-k">Closing fund value after the adjustments</div>
+                        <div class="review-v">@($"R {FinalAdjFundValue:N0}")</div>
+                    </div>
+                    <div class="review-kv">
+                        <div class="review-k">Monthly drawdown at retirement, before adjusting</div>
+                        <div class="review-v">@($"R {initialdrawdown:N0}")</div>
+                    </div>
+                    <div class="review-kv">
+                        <div class="review-k">The adjusted monthly drawdown</div>
+                        <div class="review-v">@($"R {drawdown:N0}")</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="review-highlight">
+                    <div class="review-highlight-title">There is nothing to adjust</div>
+                    <ul class="review-highlight-list">
+                        <li>
+                            Based on your current financial savings, contributions and
+                            salary you won't need to adjust anything.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="review-kv-grid">
+                    <div class="review-kv">
+                        <div class="review-k">Your final fund value</div>
+                        <div class="review-v">@($"R {FinalFundValue:N0}")</div>
+                    </div>
+                    <div class="review-kv">
+                        <div class="review-k">Your net replacement ratio</div>
+                        <div class="review-v">@($"{InitNRR:N2} %")</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="admin-panel">
+            <h2 class="admin-subtitle">What this was worked out from</h2>
+
+            <div class="review-kv-grid">
+                <div class="review-kv">
+                    <div class="review-k">Fund</div>
+                    <div class="review-v">@inputvalues.FundSelection</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Retirement age</div>
+                    <div class="review-v">@inputvalues.RetAge</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Annual salary</div>
+                    <div class="review-v">@($"R {inputvalues.AnnualSalary:N0}")</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Retirement savings so far</div>
+                    <div class="review-v">@($"R {inputvalues.RetirementSavings:N0}")</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Your contribution</div>
+                    <div class="review-v">@($"{inputvalues.ContributionSelection:P1}")</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">@inputvalues.AnnuitySelection, drawing down</div>
+                    <div class="review-v">@($"{inputvalues.DrawDownSelection:P1}")</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Required net replacement ratio</div>
+                    <div class="review-v">@($"{inputvalues.NRR:P0}")</div>
+                </div>
+                <div class="review-kv">
+                    <div class="review-k">Months still to run</div>
+                    <div class="review-v">@Mnths</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-actions">
+            <button type="button" class="btn btn-primary" @onclick="BackToInputs">Change your answers</button>
+        </div>
+    }
+</div>
+
+@code {
+    string SelectedFund = "";
+
+    double startfundvalue = 0;
+    double monthlysalary;
+
+    double cpi = 0.05;
+    double drawdown;
+    double TopUpValue;
+    double ContInc;
+    double Cont_Inc_To_Use;
+    double FinalFundValue;
+    double InitialFinalFundValue;
+    double FinalAdjFundValue;
+    double initialdrawdown;
+    double totalgrowth;
+    double totalcontribution;
+    double finalmonthlysalary;
+    double contributionfees;
+    double InitNRR;
+    double PensionDrawDown;
+    double RequiredDrawDown;
+
+    bool calccomplete = false;
+    bool NoDOB = false;
+    bool NoSalary = false;
+    bool NoNRR = false;
+    bool NoDrawDown = false;
+    bool Fundselected = true;
+    bool DoCalc = true;
+    bool writeinfo = false;
+    bool normalmessages = true;
+
+    int smonth = 1;
+    int Mnths;
+
+    record ChartInfo(double value, int month);
+
+    ChartInfo[] ClosingFundValues = null!;
+    ChartInfo[] InitialClosingFundValues = null!;
+    ChartInfo[] FundClosingFundValues = null!;
+    ChartInfo[] PercClosingFundValues = null!;
+    ChartInfo[] MonthlySalaryArr = null!;
+
+    protected override void OnInitialized()
+    {
+        // Opened on its own, without the form having been filled in — a
+        // bookmark, or a refresh once the browser has forgotten the answers.
+        // There is nothing to show, so the form is where to go.
+        if (!inputvalues.Answered)
+        {
+            NavMan.NavigateTo("/");
+            return;
+        }
+
+        // Checked before anything is worked out rather than after. An answer
+        // that is missing makes every figure below it meaningless, and a date
+        // of birth that is missing has nothing to count the months from.
+        if (inputvalues.DOB is null)
+        {
+            DoCalc = false;
+            NoDOB = true;
+        }
+
+        if (inputvalues.AnnualSalary == 0)
+        {
+            DoCalc = false;
+            NoSalary = true;
+        }
+
+        if (inputvalues.NRR == 0)
+        {
+            DoCalc = false;
+            NoNRR = true;
+        }
+
+        if (inputvalues.DrawDownSelection == 0)
+        {
+            DoCalc = false;
+            NoDrawDown = true;
+        }
+
+        if (string.IsNullOrWhiteSpace(inputvalues.FundSelection))
+        {
+            DoCalc = false;
+            Fundselected = false;
+        }
+
+        if (!DoCalc)
+        {
+            return;
+        }
+
+        DateTime LastPaymentDate = inputvalues.DOB!.Value.AddYears(inputvalues.RetAge);
+        LastPaymentDate = LastPaymentDate.AddDays(-LastPaymentDate.Day);
+        DateTime CurrentDate = DateTime.Now.Date;
+        contributionfees = FundContributionFees(inputvalues.FundSelection);
+        Mnths = GetMonthsDifference(CurrentDate, LastPaymentDate);
+        startfundvalue = inputvalues.RetirementSavings;
+        monthlysalary = inputvalues.AnnualSalary / 12;
+        SelectedFund = inputvalues.FundSelection;
+        totalgrowth = FundGrowth(inputvalues.FundSelection) + inputvalues.CPISelection;
+        totalcontribution = FundContribution(inputvalues.FundSelection) + inputvalues.ContributionSelection - contributionfees;
+
+        drawdown = inputvalues.DrawDownSelection;
+        smonth = 1;
+        Calculate();
+        calccomplete = true;
+    }
+
+    private void BackToInputs()
+    {
+        NavMan.NavigateTo("/");
+    }
+
+    private int GetMonthsDifference(DateTime startDate, DateTime endDate)
+    {
+
+        if (endDate < startDate)
+        {
+            DateTime temp = startDate;
+            startDate = endDate;
+            endDate = temp;
+        }
+
+        int monthsDifference = (endDate.Year - startDate.Year) * 12 + endDate.Month - startDate.Month + 1;
+
+        return monthsDifference;
+    }
+
+    public double GetClosingFundValue(double StartFundValue, double MonthlySalary, double ContributionPerc, double InvestmentGrowthPerc, double CPI, int currmnth, int EndMnth)
+    {
+        double FinalValue = 0;
+
+        if ((currmnth != 1) && (((currmnth) % 12) == 1))
+        {
+            MonthlySalary = MonthlySalary * (1 + CPI);
+        }
+
+        double investmentreturn = (Math.Pow(1 + InvestmentGrowthPerc, 1.0 / 12.0) - 1);
+        double contributionvalue = MonthlySalary * ContributionPerc;
+        double investmentgrowth = investmentreturn * StartFundValue;
+        FinalValue = StartFundValue + investmentgrowth + contributionvalue;
+        MonthlySalaryArr[currmnth - 1] = new ChartInfo(MonthlySalary, currmnth);
+        ClosingFundValues[currmnth - 1] = new ChartInfo(FinalValue, currmnth);
+
+        if (writeinfo)
+        {
+            Console.WriteLine(($"Initial Fund Value : {StartFundValue:N2} Monthly Salary : {MonthlySalary:N0} Contribution : {contributionvalue:N2} Investment Growth : {investmentgrowth:N2} Closing Fund Value : {FinalValue:N2} "));
+        }
+        if (currmnth == EndMnth)
+        {
+            finalmonthlysalary = MonthlySalary;
+            return FinalValue;
+        }
+        else
+        {
+            return GetClosingFundValue(FinalValue, MonthlySalary, ContributionPerc, InvestmentGrowthPerc, CPI, currmnth + 1, EndMnth);
+        }
+    }
+
+    private double BinSearchTopUp(double low, double high, double goalvalue, double Tolerance, int iter)
+    {
+
+        double MidValue = (low + high) / 2.0;
+        double total = startfundvalue + MidValue;
+        double initialNRR = high * drawdown / (finalmonthlysalary * (1 - totalcontribution - contributionfees)) / 12;
+        double fundvalue = GetClosingFundValue(total, monthlysalary, totalcontribution, totalgrowth, cpi, smonth, Mnths);
+        double NRR = (drawdown * fundvalue / 12) / (finalmonthlysalary * (1 - totalcontribution - contributionfees));
+        double diff = goalvalue - NRR;
+
+        if (iter > 1000)
+        {
+            return -999;
+        }
+        if (Math.Abs(diff) < Tolerance)
+        {
+            return MidValue;
+        }
+        else
+        {
+            if (diff > 0)
+            {
+                if (high == MidValue)
+                {
+                    return BinSearchTopUp(MidValue, high * 1.5, goalvalue, Tolerance, iter + 1);
+                }
+                else
+                {
+                    return BinSearchTopUp(MidValue, high, goalvalue, Tolerance, iter + 1);
+                }
+            }
+            else
+            {
+                if (low == MidValue)
+                {
+                    return BinSearchTopUp(low / 1.5, MidValue, goalvalue, Tolerance, iter + 1);
+                }
+                else
+                {
+                    return BinSearchTopUp(low, MidValue, goalvalue, Tolerance, iter + 1);
+                }
+
+            }
+        }
+    }
+
+    private double BinSearchPerc(double low, double high, double goalvalue, double Tolerance, int iter)
+    {
+
+        double MidValue = (low + high) / 2.0;
+        double totalcont = totalcontribution + MidValue;
+        double fundvalue = GetClosingFundValue(startfundvalue, monthlysalary, totalcont, totalgrowth, cpi, smonth, Mnths);
+        double NRR = (drawdown * fundvalue / 12) / (finalmonthlysalary * (1 - totalcontribution - contributionfees));
+        double diff = goalvalue - NRR;
+
+        if (iter > 1000)
+        {
+            return -999;
+        }
+        if (Math.Abs(diff) < Tolerance)
+        {
+            return MidValue;
+        }
+        else
+        {
+            if (diff > 0)
+            {
+                if (high == MidValue)
+                {
+                    return BinSearchPerc(MidValue, high * 1.5, goalvalue, Tolerance, iter + 1);
+                }
+                else
+                {
+                    return BinSearchPerc(MidValue, high, goalvalue, Tolerance, iter + 1);
+                }
+            }
+            else
+            {
+                if (low == MidValue)
+                {
+                    return BinSearchPerc(low / 1.5, MidValue, goalvalue, Tolerance, iter + 1);
+                }
+                else
+                {
+                    return BinSearchPerc(low, MidValue, goalvalue, Tolerance, iter + 1);
+                }
+
+            }
+        }
+    }
+
+    private double FundGrowth(string Fund)
+    {
+        double growth = 0.031475;
+
+        if (Fund == "GEPF")
+        {
+            growth = 0.05;
+        }
+        if (Fund == "Members of Parliament")
+        {
+            growth = 0.045;
+        }
+        if (Fund == "Kuleni Preservation Fund Cash")
+        {
+            growth = 0.0015;
+
+        }
+
+        return growth;
+    }
+
+    private double FundContribution(string Fund)
+    {
+        double Contribution;
+        Contribution = 0;
+        if (Fund == "GEPF")
+        {
+            Contribution = 0.185;
+        }
+        if (Fund == "Members of Parliament")
+        {
+            Contribution = 0.25;
+        }
+        return Contribution;
+    }
+
+    private double FundContributionFees(string Fund)
+    {
+        double Fees = 0;
+
+        if (Fund == "GEPF")
+        {
+            Fees = 0.0416;
+        }
+        if (Fund == "Members of Parliament")
+        {
+            Fees = 0.083;
+        }
+
+        return Fees;
+    }
+
+    private void Calculate()
+    {
+        double CPI = inputvalues.CPISelection;
+
+        MonthlySalaryArr = new ChartInfo[Mnths];
+        ClosingFundValues = new ChartInfo[Mnths];
+        writeinfo = true;
+        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+
+        GetClosingFundValue(inputvalues.RetirementSavings, monthlysalary, totalcontribution, totalgrowth, CPI, 1, Mnths);
+        writeinfo = false;
+        ClosingFundValues[0] = new ChartInfo(0, 0);
+        FinalFundValue = ClosingFundValues[Mnths - 1].value;
+        InitialFinalFundValue = FinalFundValue;
+
+        PensionDrawDown = inputvalues.DrawDownSelection * FinalFundValue / 12;
+        RequiredDrawDown = finalmonthlysalary * (1 - totalcontribution - contributionfees);
+        InitNRR = PensionDrawDown / RequiredDrawDown * 100;
+
+        InitialClosingFundValues = new ChartInfo[Mnths];
+        InitialClosingFundValues = ClosingFundValues.Select(v => v).ToArray();
+
+        if ((inputvalues.FundSelection == "Kuleni Preservation Fund Cash") || (inputvalues.FundSelection == "Kuleni Preservation Fund Balanced"))
+        {
+            FinalFundValue = RequiredDrawDown * 12 / inputvalues.DrawDownSelection;
+        }
+        TopUpValue = BinSearchTopUp(FinalFundValue / Mnths, FinalFundValue, inputvalues.NRR, 0.000001, 0);
+        ContInc = BinSearchPerc(0, 0.99, inputvalues.NRR, 0.00001, 0);
+
+        double NewStartingFundValue = startfundvalue + TopUpValue;
+        double NewContributionPerc = ContInc + totalcontribution;
+
+        GetClosingFundValue(NewStartingFundValue, monthlysalary, totalcontribution, totalgrowth, CPI, 1, Mnths);
+        FundClosingFundValues = new ChartInfo[Mnths];
+        FundClosingFundValues = ClosingFundValues.Select(v => v).ToArray();
+        GetClosingFundValue(startfundvalue, monthlysalary, NewContributionPerc, totalgrowth, CPI, 1, Mnths);
+        PercClosingFundValues = new ChartInfo[Mnths];
+        PercClosingFundValues = ClosingFundValues.Select(v => v).ToArray();
+        FinalAdjFundValue = PercClosingFundValues[Mnths - 1].value;
+        initialdrawdown = FinalFundValue * inputvalues.DrawDownSelection / 12;
+
+        drawdown = FinalAdjFundValue * inputvalues.DrawDownSelection / 12;
+
+        if (PercClosingFundValues[Mnths - 1].value < PercClosingFundValues[0].value)
+        {
+            normalmessages = false;
+        }
+
+        if (TopUpValue < 0)
+        {
+            normalmessages = false;
+        }
+        Cont_Inc_To_Use = ContInc + contributionfees;
+        if ((inputvalues.FundSelection == "Kuleni Preservation Fund Cash") || (inputvalues.FundSelection == "Kuleni Preservation Fund Balanced"))
+        {
+            Cont_Inc_To_Use = 0;
+            if (InitialFinalFundValue == 0)
+            {
+                normalmessages = true;
+            }
+        }
+    }
+}
