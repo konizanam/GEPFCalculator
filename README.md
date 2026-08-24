@@ -114,6 +114,28 @@ keeps serving until it restarts either way.
 4. load https://www.kuleni.com.na/gepf/ and check that nothing 404s
 ```
 
-Step 4 is not a formality. The two ways this has broken so far — assets
-resolved against the parent site, and a published `web.config` written over a
-hand edit — both leave a page that arrives looking fine.
+Step 4 is not a formality. The three ways this has broken so far — assets
+resolved against the parent site, a published `web.config` written over a hand
+edit, and the parent's rewrite rule not actually removed — all leave a page
+that arrives looking fine.
+
+The third is worth knowing by sight. `web.config` clears the inherited rewrite
+rules with `<clear />` rather than naming one to remove, because naming one
+has to name it exactly and twice it did not: this repository said `WordPress:
+http://localhost:84` and the server said `WordPress:
+https://www.kuleni.com.na`, and the parent had neither. A rule left in place
+sends everything under `/gepf/` to WordPress, which answers its own 404 page —
+so the document arrives (a directory is not rewritten) while every stylesheet,
+script and image does not, and the page renders unstyled with its Blazor error
+bar showing, because the CSS that keeps that bar hidden is one of the things
+that never loaded.
+
+Telling the two apart takes one request:
+
+```
+curl -sI https://www.kuleni.com.na/gepf/css/site.css
+```
+
+`X-Powered-By: PHP` in the response is WordPress answering, and means the
+rewrite rules are still inherited. `401` is IIS asking for the Basic
+credentials, which is this path working as intended.
