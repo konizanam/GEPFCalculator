@@ -1,5 +1,7 @@
 using GEPF.Components;
 using GEPF.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,19 @@ builder.Services.AddRazorComponents()
 // The answers are one person's, and they are carried from the form to the
 // figures worked out from them.
 builder.Services.AddScoped(sp => new InputValues());
+
+// One password for everybody, Login:Password in appsettings, and nothing
+// else: the calculator holds nobody's details, so there is no account to sign
+// in to — only a door. A visitor who has given the password carries a cookie
+// for as long as the browser stays open. The cookie's path is the app's own
+// (/gepf/ live), so it is never sent to the WordPress around it.
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login";
+        options.Cookie.Name = "GEPF.SignedIn";
+    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -37,10 +52,25 @@ if (pathBase.Length > 0)
 
 app.UseHttpsRedirection();
 
+// Stylesheets, scripts and the logo are served ahead of the door, so the
+// sign-in page is dressed like the rest.
 app.UseStaticFiles();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseAntiforgery();
 
+// Every page needs the password except the ones marked [AllowAnonymous]:
+// Login itself, and Error.
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .RequireAuthorization();
+
+// Back to the sign-in page under the request's own path base — /gepf/Login
+// live, not the parent site's /Login.
+app.MapPost("/Logout", async (HttpContext context) =>
+{
+    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+    context.Response.Redirect($"{context.Request.PathBase}/Login");
+});
 
 app.Run();

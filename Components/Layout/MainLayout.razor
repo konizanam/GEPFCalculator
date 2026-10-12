@@ -53,6 +53,20 @@
             <div class="topbar-user">
                 <span class="topbar-user-name">Retirement fund member options</span>
             </div>
+
+            @* The loan application's sign-out button. A plain post, which
+               Blazor leaves to the browser, to the endpoint in Program.cs;
+               relative, so it goes to /gepf/Logout live. *@
+            <form method="post" action="Logout" class="topbar-logout">
+                <button type="submit" class="topbar-logout-btn" title="Sign out" aria-label="Sign out">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                         stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                        <path d="M6 14H3V2h3" />
+                        <path d="M10.5 11.5 14 8l-3.5-3.5" />
+                        <path d="M14 8H6" />
+                    </svg>
+                </button>
+            </form>
         </div>
 
         <main role="main" class="app-content">

@@ -1,0 +1,18 @@
+@inherits LayoutComponentBase
+
+@*
+    For the sign-in page: no sidebar and no top bar, because there is nothing
+    behind them yet to go to. The card is the loan application's sign-in card,
+    account-shell → account-card, from site.css.
+*@
+@Body
+
+<footer class="mt-5 py-4 bg-light">
+    <div class="container text-center">
+        <p class="text-muted mb-0">
+            &copy; @DateTime.Now.Year Kuleni Financial Services. All rights reserved.
+            <span class="mx-2">|</span>
+            Developed By <a href="https://it.konizanam.com" target="_blank" rel="noopener noreferrer">Koniza Information Technology</a>
+        </p>
+    </div>
+</footer>

@@ -7,6 +7,22 @@ what it would take: a top up to the fund, or a bigger monthly contribution.
 Two screens. **Your details** asks the questions; **Results** reads the figures
 back. Blazor Server, .NET 10.
 
+## Signing in
+
+Both screens are behind a sign-in page that asks for a password and nothing
+else. There is one password, it is everybody's, and it is `Login:Password` —
+in `appsettings.json`, and again in `appsettings.Development.json` for local
+runs. Left empty, nobody can sign in: the page says signing in has not been
+set up rather than letting everyone through.
+
+Signing in sets a cookie that lasts until the browser is closed; the button at
+the right of the top bar signs out. The sign-in page is the one page rendered
+without the circuit (`[ExcludeFromInteractiveRouting]`), because only a
+response can carry a cookie.
+
+The repository is public, so a password committed to either file can be read
+by anyone.
+
 ## Look and feel
 
 The look is the Kuleni loan application's, and not a copy of it made by hand:
@@ -54,7 +70,9 @@ dotnet publish GEPF.csproj -c Release -o "publish/GEPF"
 
 `publish/` is not committed. Unlike the loan application, `appsettings.json` is
 published with the rest: there is no connection string, no mail account and no
-key in it, so there is nothing on a server for a deployment to overwrite.
+key in it, so there is nothing on a server for a deployment to overwrite. The
+one exception is the sign-in password: whatever `Login:Password` holds when you
+publish is the password on the server, so changing it means publishing again.
 
 Run the published output **from its own folder**, or the content root is
 wherever you started it from and `wwwroot/_framework` is looked for in the

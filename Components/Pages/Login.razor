@@ -1,0 +1,123 @@
+@page "/Login"
+@layout Layout.AccountLayout
+@attribute [AllowAnonymous]
+@attribute [ExcludeFromInteractiveRouting]
+@using System.Security.Claims
+@using System.Security.Cryptography
+@using System.Text
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Authorization
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<PageTitle>Sign in - Kuleni Retirement Calculator</PageTitle>
+
+@*
+    Rendered on the server for the request, not over the circuit: signing in
+    writes a cookie, and only a response can carry one. App.razor reads
+    [ExcludeFromInteractiveRouting] and leaves this page static.
+
+    Only the password is asked for. There is one, it is everybody's, and it is
+    Login:Password in appsettings.
+*@
+<div class="account-shell">
+    <div class="account-card">
+        <div class="account-brand">
+            <img src="images/kuleni-logo.png" alt="Kuleni Financial Services" class="account-brand-logo" />
+            <div class="account-brand-title">Retirement Calculator</div>
+        </div>
+
+        @if (ErrorMessage is not null)
+        {
+            <div class="alert alert-danger" role="alert">@ErrorMessage</div>
+        }
+
+        <EditForm Model="Form" FormName="login" OnSubmit="SignInAsync">
+            <div class="mb-3">
+                <label class="form-label" for="password">
+                    Password <span class="text-danger">*</span>
+                </label>
+                <InputText type="password" class="form-control" id="password" required autofocus
+                           autocomplete="current-password" @bind-Value="Form!.Password" />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    private LoginForm? Form { get; set; }
+
+    /// <summary>Where the visitor was going when they were sent here.</summary>
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    private string? ErrorMessage { get; set; }
+
+    protected override void OnInitialized() => Form ??= new();
+
+    private async Task SignInAsync()
+    {
+        var expected = Configuration["Login:Password"];
+        if (string.IsNullOrEmpty(expected))
+        {
+            // No password set is a door nobody can open, not one left open.
+            ErrorMessage = "Signing in has not been set up: there is no password in appsettings.";
+            return;
+        }
+
+        if (!Matches(Form?.Password ?? string.Empty, expected))
+        {
+            ErrorMessage = "That is not the password.";
+            return;
+        }
+
+        var identity = new ClaimsIdentity(
+            [new Claim(ClaimTypes.Name, "GEPF")],
+            CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+        NavigationManager.NavigateTo(SafeReturnUrl());
+    }
+
+    /// <summary>
+    /// The page the visitor was sent here from, if it is one of this site's.
+    /// The cookie handler writes it with the path base already on it
+    /// (/gepf/Results), so it is used as it stands. Anything that leaves the
+    /// site — "//elsewhere", "https://..." — goes to the first page instead.
+    /// </summary>
+    private string SafeReturnUrl()
+    {
+        if (!string.IsNullOrEmpty(ReturnUrl)
+            && ReturnUrl.StartsWith('/')
+            && !ReturnUrl.StartsWith("//")
+            && !ReturnUrl.StartsWith("/\\"))
+        {
+            return ReturnUrl;
+        }
+
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Compared in the same time whatever was typed, so how long a wrong guess
+    /// takes says nothing about how close it came. Hashed first because the
+    /// comparison wants two arrays of one length.
+    /// </summary>
+    private static bool Matches(string given, string expected) =>
+        CryptographicOperations.FixedTimeEquals(
+            SHA256.HashData(Encoding.UTF8.GetBytes(given)),
+            SHA256.HashData(Encoding.UTF8.GetBytes(expected)));
+
+    private sealed class LoginForm
+    {
+        public string? Password { get; set; }
+    }
+}

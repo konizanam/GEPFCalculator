@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <Routes @rendermode="InteractiveServer" />
+    <Routes @rendermode="PageRenderMode" />
 
     <div id="blazor-error-ui">
         Something went wrong.
@@ -44,6 +44,15 @@
 @code {
     [CascadingParameter]
     private HttpContext? HttpContext { get; set; }
+
+    /// <summary>
+    /// Interactive everywhere but the sign-in page. Signing in writes a
+    /// cookie, and only a page rendered on the server for the request can do
+    /// that — once the circuit is open there is no response left to write it
+    /// to. The page says so with [ExcludeFromInteractiveRouting].
+    /// </summary>
+    private IComponentRenderMode? PageRenderMode =>
+        HttpContext?.AcceptsInteractiveRouting() == false ? null : InteractiveServer;
 
     /// <summary>
     /// The path the app is served under, with a trailing slash: "/" at a site
