@@ -182,3 +182,7 @@ CLAUDE.md
 .claude/
 .claude*/
 .mcp.json
+
+# Carry the sign-in password (Login:Password), and the repository is public.
+appsettings.json
+appsettings.Development.json

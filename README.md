@@ -20,8 +20,26 @@ the right of the top bar signs out. The sign-in page is the one page rendered
 without the circuit (`[ExcludeFromInteractiveRouting]`), because only a
 response can carry a cookie.
 
-The repository is public, so a password committed to either file can be read
-by anyone.
+Neither file is in source control, because the repository is public and a
+password committed to it can be read by anyone. A fresh clone has neither:
+create them by hand, at the root, before running or publishing —
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Login": {
+    "Password": "..."
+  }
+}
+```
+
+`appsettings.Development.json` is the same without `AllowedHosts`.
 
 ## Look and feel
 
