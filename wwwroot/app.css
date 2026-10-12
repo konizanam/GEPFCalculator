@@ -46,3 +46,23 @@
     color: var(--kuleni-gray);
     margin: 8px 0 0;
 }
+
+/* Blazor moves focus to the page's heading on every navigation, so a screen
+   reader announces the new page. The heading is not something to type into,
+   and the ring it was drawn with read as a box round the title. */
+h1:focus {
+    outline: none;
+}
+
+/* The sign-in page: the card in the space above the footer, and the footer
+   at the foot of the screen rather than halfway up a phone. */
+.account-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.account-page > .account-shell {
+    flex: 1 0 auto;
+    align-items: flex-start;
+}

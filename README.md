@@ -65,6 +65,12 @@ Which means the house rules apply here too:
 file says where: Blazor replaces fields as the answers change, so fields are
 bound as they appear rather than once when the document loads.
 
+`sidebar.js` differs for the same reason. Blazor swaps the page it prerendered
+for the live one, and a listener bound to the menu button on load was left on
+the old button — the menu never opened or collapsed, which on a phone meant
+there was no way to the other screen. Clicks are caught at the document
+instead, so the button works whichever copy of the page is showing.
+
 ## Running locally
 
 ```
